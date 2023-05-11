@@ -1,4 +1,4 @@
-`title: Data Binding author: dongee_seo date: 2023-05-11 categories: [Blogging] tags: [React]`
+`title: State and Props author: dongee_seo date: 2023-05-11 categories: [Blogging] tags: [React]`
 
 # 데이터 바인딩
 
