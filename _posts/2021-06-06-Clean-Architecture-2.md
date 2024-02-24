@@ -113,4 +113,11 @@ DB -> Adapter -> Use Cases -> Entities
 전자의 영역이 비즈니스 로직이다. 이처럼 비즈니스 로직은 가장 핵심이 되는 요소이다. 또한 유지보수와 확장성 또한 고려해야하므로 아키텍쳐를 알고 있어야 한다.
 
 > 출처
-> [http://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html](http://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) > [https://pusher.com/tutorials/clean-architecture-introduction](https://pusher.com/tutorials/clean-architecture-introduction) > [https://velog.io/@itssweetrain/clean-architecture-Defining-Terms](https://velog.io/@itssweetrain/clean-architecture-Defining-Terms) > [클린아키텍처 계층분리의 장점](https://medium.com/@justfaceit/clean-architecture%EB%8A%94-%EB%AA%A8%EB%B0%94%EC%9D%BC-%EA%B0%9C%EB%B0%9C%EC%9D%84-%EC%96%B4%EB%96%BB%EA%B2%8C-%EB%8F%84%EC%99%80%EC%A3%BC%EB%8A%94%EA%B0%80-1-%EA%B2%BD%EA%B3%84%EC%84%A0-%EA%B3%84%EC%B8%B5%EC%9D%84-%EC%A0%95%EC%9D%98%ED%95%B4%EC%A4%80%EB%8B%A4-b77496744616)
+
+> [https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
+
+> [https://pusher.com/tutorials/clean-architecture-introduction](https://pusher.com/tutorials/clean-architecture-introduction)
+
+> [https://velog.io/@itssweetrain/clean-architecture-Defining-Terms](https://velog.io/@itssweetrain/clean-architecture-Defining-Terms)
+
+> [클린아키텍처 계층분리의 장점](https://medium.com/@justfaceit/clean-architecture%EB%8A%94-%EB%AA%A8%EB%B0%94%EC%9D%BC-%EA%B0%9C%EB%B0%9C%EC%9D%84-%EC%96%B4%EB%96%BB%EA%B2%8C-%EB%8F%84%EC%99%80%EC%A3%BC%EB%8A%94%EA%B0%80-1-%EA%B2%BD%EA%B3%84%EC%84%A0-%EA%B3%84%EC%B8%B5%EC%9D%84-%EC%A0%95%EC%9D%98%ED%95%B4%EC%A4%80%EB%8B%A4-b77496744616)

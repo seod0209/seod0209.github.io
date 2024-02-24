@@ -3,12 +3,9 @@ layout: default
 refactor: true
 ---
 
-<<<<<<< HEAD {% include lang.html %} {% assign pinned = site.posts | where:
-'pin', 'true' %} {% assign default = site.posts | where_exp: 'item', 'item.pin
-!= true and item.hidden != true' %} {% assign posts = '' | split: '' %} =======
-{% assign pinned = site.posts | where: 'pin', 'true' %} {% assign default =
-site.posts | where_exp: 'item', 'item.pin != true and item.hidden != true' %} {%
-assign posts = '' | split: '' %} >>>>>>> 36ef759 (udpate layout)
+{% include lang.html %} {% assign pinned = site.posts | where: 'pin', 'true' %}
+{% assign default = site.posts | where_exp: 'item', 'item.pin != true and
+item.hidden != true' %} {% assign posts = '' | split: '' %}
 
 <!-- Get pinned posts -->
 
@@ -92,6 +89,4 @@ endfor %} {% endif %}
 </div>
 <!-- #post-list -->
 
-<<<<<<< HEAD {% if paginator.total_pages > 1 %} {% include post-paginator.html
-%} {% endif %} ======= {% if paginator.total_pages > 0 %} {% include
-post-paginator.html %} {% endif %} >>>>>>> 36ef759 (udpate layout)
+{% if paginator.total_pages > 1 %} {% include post-paginator.html %} {% endif %}

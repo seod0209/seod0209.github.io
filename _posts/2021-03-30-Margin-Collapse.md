@@ -9,9 +9,7 @@ tags: [google analytics, pageviews]
 > 분명 margin-top(또는 margin-bottom)을 먹였는데... 왜죠 왜 사라지는거죠;;
 > '마진 상쇄(Margin collapsing)'가 일어나는 원인을 알아보고 아래 사진처럼 대참사가 일어나지 않게하는 방법을 찾아보자.
 
-![](https://velog.velcdn.com/images%2Fseod0209%2Fpost%2Ff761f1be-97fb-4517-91c5-622085aeea4e%2FScreen%20Shot%202021-03-28%20at%2011.51.04%20AM.png)
-
-![](https://velog.velcdn.com/images%2Fseod0209%2Fpost%2Fae56f4d9-b72f-4c27-9bc3-d6354cea3138%2FScreen%20Shot%202021-03-28%20at%2011.49.02%20AM.png)
+![](https://velog.velcdn.com/images/seod0209/post/bbd30cb9-6ef1-417c-b98b-94ab652b4ecd/image.png)
 
 ## 1. Margin collapsing 의의
 
@@ -122,13 +120,7 @@ margin이란 콘텐츠 간의 간격이고, 간격을 벌리기 위해서는 경
 
 :: 마치며
 지난번 CSS과제를 하면서 모든것에 absolute로 도배하며 원하는 화면이 나오는것에만 만족했는데,,absolute로 모든 문제를 해결하기란 무리였고,, 계속되는 상쇄현상을 피하고자 이번 기회에 개념을 집고넘어갔다. 그리고 해결했다!!
-![](https://velog.velcdn.com/images%2Fseod0209%2Fpost%2F128263c6-852d-4d78-b4ec-f8d24f402f1f%2FScreen%20Shot%202021-03-28%20at%2011.49.02%20AM.png)
-
-```null
-        쫘좐!!! 👇🏼👇🏼👇🏼👇🏼👇🏼👇🏼👇🏼👇🏼👇🏼👇🏼👇🏼👇🏼👇🏼
-```
-
-![](https://velog.velcdn.com/images%2Fseod0209%2Fpost%2F2c4aae9e-2569-41d2-935a-ffb3a5e9dea9%2FScreen%20Shot%202021-03-28%20at%201.21.34%20PM.png)
+![](https://velog.velcdn.com/images/seod0209/post/37ddc5c9-cff0-4844-8bbf-63fe2fcbd5cc/image.png)
 
 ```null
 부모박스(feedBox)에 display:inline-block; 을 추가하니

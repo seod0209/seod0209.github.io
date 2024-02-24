@@ -44,9 +44,14 @@ tags: [google analytics, pageviews]
 
 레이아웃의 양 과 페이지에서 구현해야할 기능의 양 등을 기준으로 크게 3 파트로 나누었다. 어떤 파트를 할 지는 사다리타기를 통해 결정했다. (cf- css로 구현가능하는건 기능에 포함x)
 
-### 기본 구현 사항![](https://velog.velcdn.com/images%2Fseod0209%2Fpost%2Fbfc63570-4ecd-4fe5-af36-2c12caa1881c%2FScreen%20Shot%202021-04-25%20at%204.41.18%20PM.png)![](https://velog.velcdn.com/images%2Fseod0209%2Fpost%2Ffed7aa84-4338-4bda-adc5-4d4c9db52549%2FScreen%20Shot%202021-04-25%20at%204.41.33%20PM.png)
+### 기본 구현 사항
 
-### 추가 구현 사항![](https://velog.velcdn.com/images%2Fseod0209%2Fpost%2Fad69ced6-2b43-4185-974a-35d3e7d80bf5%2FScreen%20Shot%202021-04-25%20at%204.41.33%20PM%202.png)
+![](https://velog.velcdn.com/images/seod0209/post/2a609503-575b-45ee-8cbe-ce7431467b76/image.png)
+![](https://velog.velcdn.com/images/seod0209/post/d70462b4-6c9f-4c84-a8bd-f06b1b525aa4/image.png)
+
+### 추가 구현 사항
+
+![](https://velog.velcdn.com/images/seod0209/post/cd165d91-a654-4eff-a466-36585f908c47/image.png)
 
 ### 내가 맡은 구현사항: 풋터/ 상품 상세 페이지/ 카트
 
