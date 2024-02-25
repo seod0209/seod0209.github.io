@@ -1,19 +1,15 @@
-```
-title: Micro Frontend
-author: dongee_seo
-date: 2023-05-02
-categories: [Blogging]
-tags: [google analytics, pageviews]
-```
+`title: Micro Frontend author: dongee_seo date: 2023-05-02 categories: [Blogging] tags: [Micro Frontend]`
 
-마이크로 프론트앤드는 마이크로 서비스처럼 전체 화면을 작동할 수 있는 단위로 나누어 개발한 후 서로 조립하는 방식이다. 여기서 작동 단위에 사용된 프론트앤드 프레임워크로 Angular 이든, React 또는 Vue 또는 Vanilla 자바스크립트에 상관하지 않고 조합 가능한 방법을 제공한다. 본글에서는 마이크로 프론트앤드 개발 방법중 Angular 프레임워크를 사용하면서 [Web Components](https://developer.mozilla.org/ko/docs/Web/Web_Components)를 사용한 통합 방법에 대핸 알아보자.
+마이크로 프론트앤드는 마이크로 서비스처럼 전체 화면을 작동할 수 있는 단위로 나누어 개발한 후 서로 조립하는 방식이다.
+여기서 작동 단위에 사용된 프론트앤드 프레임워크로 Angular 이든, React 또는 Vue 또는 Vanilla 자바스크립트에 상관하지 않고 조합 가능한 방법을 제공한다.
 
 ![](https://blog.kakaocdn.net/dn/Z8Xpj/btqD8ivThmR/Eli8ghsYYVPmTokeiQno81/img.png)
 마이크로 프론트앤드 기반 독립된 팀별 애플리케이션 개발
 
 ## Micro Frontend 개념
 
-마이크로 프론앤드 개념으로 개발을 하는 잇점은 대규모 엔터프라이즈 애플리케이션을 개발한다고 가정할 때, 각 팀별 또는 업무단위에 대해 Backend + Frontend 개발 후 통합하는 이슈를 줄일 수 있다.
+마이크로 프론앤드 개념으로 개발을 하는 잇점은 대규모 엔터프라이즈 애플리케이션을 개발한다고 가정할 때,
+각 팀별 또는 업무단위에 대해 Backend + Frontend 개발 후 통합하는 이슈를 줄일 수 있다.
 
 - 작고, 응집력 있고 유지보수성을 가지는 코드베이스를 가질 수 있다. ( **_Simple, decoupled codebase_** )
 - 분리배포가 용이하고, 자율적인 팀 조직운영이 수월해진다. ( **_Independent deployment, Autonomous teams_** )
