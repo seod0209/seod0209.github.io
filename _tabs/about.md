@@ -10,7 +10,7 @@ order: 4
   class="contacts">
   <a
     target="_blank"
-    href="https://shocking-afternoon-a24.notion.site/Dongee-Seo-b8c4290b6b2c4d0189b8a43835fd68bc">
+    href="https://don9z.notion.site/Dongee-Seo-b8c4290b6b2c4d0189b8a43835fd68bc">
     <i class="fas fa-file"></i> Resume
   </a>
 </div>
