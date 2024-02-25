@@ -68,14 +68,14 @@
       }
 
       &:nth-child(odd) {
-        background-color: var(--main-wrapper-bg, #fff);
+        background-color: var(--main-wrapper-bg, #ffffff);
         background-image: linear-gradient(
           to left,
-          #fff,
+          #ffffff,
           #fbfbfb,
           #fbfbfb,
           #fbfbfb,
-          #fff
+          #ffffff
         );
       }
 
