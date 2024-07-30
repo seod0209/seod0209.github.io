@@ -12,7 +12,7 @@
     this.page.identifier = "{{ page.url }}";
   };
 
-  /* Lazy loading */
+  {%- comment -%} Lazy loading {%- endcomment -%}
   var disqus_observer = new IntersectionObserver(
     function (entries) {
       if (entries[0].isIntersecting) {
@@ -31,10 +31,15 @@
     { threshold: [0] }
   );
 
+<<<<<<< HEAD
   disqus_observer.observe(document.querySelector("#disqus-thread"));
+=======
+  disqus_observer.observe(document.getElementById('disqus_thread'));
+>>>>>>> refs/remotes/origin/main
 
-  /* Auto switch theme */
+  {%- comment -%} Auto switch theme {%- endcomment -%}
   function reloadDisqus() {
+<<<<<<< HEAD
     if (
       event.source === window &&
       event.data &&
@@ -42,6 +47,11 @@
     ) {
       /* Disqus hasn't been loaded */
       if (typeof DISQUS === "undefined") {
+=======
+    if (event.source === window && event.data && event.data.direction === ModeToggle.ID) {
+      {%- comment -%} Disqus hasn't been loaded {%- endcomment -%}
+      if (typeof DISQUS === 'undefined') {
+>>>>>>> refs/remotes/origin/main
         return;
       }
 
@@ -51,7 +61,12 @@
     }
   }
 
+<<<<<<< HEAD
   if (document.querySelector(".mode-toggle")) {
     window.addEventListener("message", reloadDisqus);
+=======
+  if (document.getElementById('mode-toggle')) {
+    window.addEventListener('message', reloadDisqus);
+>>>>>>> refs/remotes/origin/main
   }
 </script>

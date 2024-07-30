@@ -1,5 +1,9 @@
 import { basic, initSidebar, initTopbar } from './modules/layouts';
 
-basic();
 initSidebar();
+<<<<<<< HEAD
 initTopbar();
+=======
+initTopbar();
+basic();
+>>>>>>> refs/remotes/origin/main

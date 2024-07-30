@@ -9,7 +9,12 @@ layout: compress
 endif %}
 
 <!-- `site.alt_lang` can specify a language different from the UI -->
-<html lang="{{ site.alt_lang | default: site.lang }}" {{ prefer_mode }}>
+<html
+  lang="{{ page.lang | default: site.alt_lang | default: site.lang }}"
+  {{
+  prefer_mode
+  }}
+>
   {% include head.html %}
 
   <body>
@@ -75,8 +80,7 @@ endif %}
     {% endif %}
 
     <!-- JavaScripts -->
-
-    {% include js-selector.html %} {% if page.mermaid %} {% include mermaid.html
-    %} {% endif %} {% include_cached search-loader.html %}
+    {% include js-selector.html lang=lang %} {% include_cached
+    search-loader.html lang=lang %}
   </body>
 </html>
