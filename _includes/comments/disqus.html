@@ -31,27 +31,13 @@
     { threshold: [0] }
   );
 
-<<<<<<< HEAD
-  disqus_observer.observe(document.querySelector("#disqus-thread"));
-=======
   disqus_observer.observe(document.getElementById('disqus_thread'));
->>>>>>> refs/remotes/origin/main
 
   {%- comment -%} Auto switch theme {%- endcomment -%}
   function reloadDisqus() {
-<<<<<<< HEAD
-    if (
-      event.source === window &&
-      event.data &&
-      event.data.direction === ModeToggle.ID
-    ) {
-      /* Disqus hasn't been loaded */
-      if (typeof DISQUS === "undefined") {
-=======
     if (event.source === window && event.data && event.data.direction === ModeToggle.ID) {
       {%- comment -%} Disqus hasn't been loaded {%- endcomment -%}
       if (typeof DISQUS === 'undefined') {
->>>>>>> refs/remotes/origin/main
         return;
       }
 
@@ -61,12 +47,7 @@
     }
   }
 
-<<<<<<< HEAD
-  if (document.querySelector(".mode-toggle")) {
-    window.addEventListener("message", reloadDisqus);
-=======
   if (document.getElementById('mode-toggle')) {
     window.addEventListener('message', reloadDisqus);
->>>>>>> refs/remotes/origin/main
   }
 </script>
