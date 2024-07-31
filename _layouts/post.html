@@ -15,7 +15,7 @@ tail_includes:
   <header>
     <h1 data-toc-skip>{{ page.title }}</h1>
     {% if page.description %}
-      <p class="post-desc fw-light mb-4">{{ page.description }}</p>
+    <p class="post-desc fw-light mb-4">{{ page.description }}</p>
     {% endif %}
 
     <div class="post-meta text-muted">
@@ -73,13 +73,14 @@ tail_includes:
 
         <div>
           <!-- pageviews -->
-          {% if site.pageviews.provider and site.analytics[site.pageviews.provider].id %}
-            <span>
-              <em id="pageviews">
-                <i class="fas fa-spinner fa-spin small"></i>
-              </em>
-              {{ site.data.locales[lang].post.pageview_measure }}
-            </span>
+          {% if site.pageviews.provider and
+          site.analytics[site.pageviews.provider].id %}
+          <span>
+            <em id="pageviews">
+              <i class="fas fa-spinner fa-spin small"></i>
+            </em>
+            {{ site.data.locales[lang].post.pageview_measure }}
+          </span>
           {% endif %}
 
           <!-- read time -->
@@ -139,3 +140,12 @@ tail_includes:
   </div>
   <!-- div.post-tail-wrapper -->
 </article>
+<!-- Utterances 댓글 스니핏 삽입 -->
+<script
+  src="https://utteranc.es/client.js"
+  repo="seod0209/seod0209.github.io"
+  issue-term="pathname"
+  theme="github-light"
+  crossorigin="anonymous"
+  async
+></script>
