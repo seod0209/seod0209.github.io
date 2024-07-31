@@ -1,15 +1,13 @@
 <!-- The Disqus lazy loading. -->
 
 <div id="disqus_thread">
-  <p class="text-center text-muted small">
-    Comments powered by <a href="https://disqus.com/">Disqus</a>.
-  </p>
+  <p class="text-center text-muted small">Comments powered by <a href="https://disqus.com/">Disqus</a>.</p>
 </div>
 
 <script type="text/javascript">
   var disqus_config = function () {
-    this.page.url = "{{ page.url | absolute_url }}";
-    this.page.identifier = "{{ page.url }}";
+    this.page.url = '{{ page.url | absolute_url }}';
+    this.page.identifier = '{{ page.url }}';
   };
 
   {%- comment -%} Lazy loading {%- endcomment -%}
@@ -18,10 +16,9 @@
       if (entries[0].isIntersecting) {
         (function () {
           var d = document,
-            s = d.createElement("script");
-          s.src =
-            "https://{{ site.comments.disqus.shortname }}.disqus.com/embed.js";
-          s.setAttribute("data-timestamp", +new Date());
+            s = d.createElement('script');
+          s.src = 'https://{{ site.comments.disqus.shortname }}.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', +new Date());
           (d.head || d.body).appendChild(s);
         })();
 
@@ -41,7 +38,7 @@
         return;
       }
 
-      if (document.readyState == "complete") {
+      if (document.readyState == 'complete') {
         DISQUS.reset({ reload: true, config: disqus_config });
       }
     }
