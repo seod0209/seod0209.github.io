@@ -7,11 +7,12 @@ set -eu
 opt_pre=false # option for bump gem version
 opt_pkg=false # option for building gem package
 
-MAIN_BRANCH="main"
+MAIN_BRANCH="master"
 RELEASE_BRANCH="production"
 
 GEM_SPEC="jekyll-theme-chirpy.gemspec"
 NODE_SPEC="package.json"
+CHANGELOG="docs/CHANGELOG.md"
 CONFIG="_config.yml"
 
 CSS_DIST="_sass/dist"
@@ -21,8 +22,8 @@ PWA_DIST="_app"
 FILES=(
   "$GEM_SPEC"
   "$NODE_SPEC"
+  "$CHANGELOG"
   "$CONFIG"
-  "_sass/main.scss"
 )
 
 TOOLS=(
