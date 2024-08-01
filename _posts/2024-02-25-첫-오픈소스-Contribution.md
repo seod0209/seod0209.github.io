@@ -1,10 +1,13 @@
-```
+---
 title: 첫 오픈소스 contribution
 author: dongee_seo
 date: 2024-02-25
 categories: [Blogging]
 tags: [google analytics, pageviews]
-```
+image: 
+  path: https://velog.velcdn.com/images/seod0209/post/19807d3d-67bf-4e1f-ae10-3971fb70c1e4/image.jpeg
+  alt: '허헛'
+---
 
 ## 라이브러리가 deprecated되었다
 

@@ -1,10 +1,10 @@
-```
+---
 title: Clean Architecture (2)
 author: dongee_seo
 date: 2021-06-06
 categories: [Blogging, Tutorial]
 tags: [google analytics, pageviews]
-```
+---
 
 ## 계층을 나누는 목적
 

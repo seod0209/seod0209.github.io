@@ -1,4 +1,10 @@
-`title: Micro Frontend: Practice author: dongee_seo date: 2023-05-03 categories: [Blogging] tags: [Micro Frontend]`
+---
+title: 'Micro Frontend: Practice' 
+author: dongee_seo 
+date: 2023-05-03 
+categories: [Blogging] 
+tags: [Micro Frontend]
+---
 
 # 마이크로 프론트엔드 아키텍처 소개
 

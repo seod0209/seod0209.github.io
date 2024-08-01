@@ -1,4 +1,10 @@
-`title: Clean Architecture: Practice author: dongee_seo date: 2023-05-09 categories: [Blogging] tags: [Architecture]`
+---
+title: 'Clean Architecture: Practice'
+author: dongee_seo 
+date: 2023-05-09 
+categories: [Blogging] 
+tags: [Architecture]
+---
 
 # Clean Architecture
 

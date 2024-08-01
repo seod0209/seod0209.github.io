@@ -1,10 +1,10 @@
-```
+---
 title: Hash Map과 Javascript Map과 Set의 연관성
 author: dongee_seo
 date: 2024-02-27
 categories: [Blogging]
 tags: [google analytics, pageviews]
-```
+---
 
 # Hash Map과 Javascript Map과 Set의 연관성
 
@@ -53,7 +53,7 @@ console.log([...set]); // [1,2,3]
 // 배열 디스트럭처링 할당의 대상
 const [a, ...rest] = set;
 console.log(a, rest); // 1 , [2,3]
-```
+---
 
 ## 집합 연산
 
@@ -119,7 +119,7 @@ const setB = new Set([1, 2, 4]);
 
 // setA와 setB의 합집합
 console.log("합집합", setA.union(setB)); // [1,2,3,4]
-```
+---
 
 ```jsx
 Set.prototype.union = function (set) {
@@ -154,7 +154,7 @@ const setB = new Set([1, 2, 4]);
 
 // setA와 setB의 차집합
 console.log("차집합", setA.difference(setB)); // [3]
-```
+---
 
 ```jsx
 Set.prototype.difference = function (set) {

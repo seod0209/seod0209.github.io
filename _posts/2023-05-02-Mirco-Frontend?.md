@@ -1,4 +1,10 @@
-`title: Micro Frontend author: dongee_seo date: 2023-05-02 categories: [Blogging] tags: [Micro Frontend]`
+---
+title: Micro Frontend 
+author: dongee_seo 
+date: 2023-05-02 
+categories: [Blogging] 
+tags: [Micro Frontend]
+---
 
 마이크로 프론트앤드는 마이크로 서비스처럼 전체 화면을 작동할 수 있는 단위로 나누어 개발한 후 서로 조립하는 방식이다.
 여기서 작동 단위에 사용된 프론트앤드 프레임워크로 Angular 이든, React 또는 Vue 또는 Vanilla 자바스크립트에 상관하지 않고 조합 가능한 방법을 제공한다.

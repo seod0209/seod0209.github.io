@@ -322,13 +322,13 @@ sup {
   @extend %rounded;
 
   &:not(.no-bg) {
-    background: var(--img-bg);
+    background: #ffffff;
   }
 
   img {
     height: 100%;
-    -o-object-fit: cover;
-    object-fit: cover;
+    -o-object-fit: contain;
+    object-fit: contain;
 
     @extend %rounded;
 
@@ -522,7 +522,6 @@ main {
   &::before {
     content: '';
     position: absolute;
-    background: var(--shimmer-bg);
     height: 100%;
     width: 100%;
     -webkit-animation: shimmer 1.3s infinite;

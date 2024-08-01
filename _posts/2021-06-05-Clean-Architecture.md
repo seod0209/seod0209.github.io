@@ -1,10 +1,10 @@
-```
+---
 title: Clean Architecture
 author: dongee_seo
 date: 2021-06-05
 categories: [Blogging, Tutorial]
 tags: [google analytics, pageviews]
-```
+---
 
 # Clean Architecture
 

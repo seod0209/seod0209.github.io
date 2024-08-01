@@ -1,11 +1,10 @@
-
-```
+---
 title: React Native 각 OS 화면비율 맞추기
 author: dongee_seo
 date: 2023-06-13
 categories: [Zippu, React-Native]
 tags: [google analytics, react native, side project]
-```
+---
 
 # Problem
 

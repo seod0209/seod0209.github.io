@@ -1,10 +1,10 @@
-```
-title: Clone Project(2): Care of Legend
+---
+title: 'Clone Project(2): Care of Legend'
 author: dongee_seo
 date: 2021-05-19
 categories: [Blogging, Tutorial]
 tags: [google analytics, pageviews]
-```
+---
 
 ![post-thumbnail](https://velog.velcdn.com/images/seod0209/post/34f69070-25e2-4a03-bdee-c83bd7a88eaf/quiz.gif)
 
