@@ -26,8 +26,7 @@
   },
   "dependencies": {
     "@popperjs/core": "^2.11.8",
-    "bootstrap": "^5.3.3",
-    "sass": "1.77.6"
+    "bootstrap": "^5.3.3"
   },
   "devDependencies": {
     "@babel/core": "^7.24.7",
