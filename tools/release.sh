@@ -12,7 +12,6 @@ RELEASE_BRANCH="production"
 
 GEM_SPEC="jekyll-theme-chirpy.gemspec"
 NODE_SPEC="package.json"
-CHANGELOG="docs/CHANGELOG.md"
 CONFIG="_config.yml"
 
 CSS_DIST="_sass/dist"
@@ -22,8 +21,8 @@ PWA_DIST="_app"
 FILES=(
   "$GEM_SPEC"
   "$NODE_SPEC"
-  "$CHANGELOG"
   "$CONFIG"
+  "_sass/main.scss"
 )
 
 TOOLS=(
