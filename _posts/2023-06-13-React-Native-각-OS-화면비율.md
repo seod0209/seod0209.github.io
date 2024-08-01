@@ -10,7 +10,7 @@ tags: [google analytics, react native, side project]
 # Problem
 
 iOS화면만 보고 개발했을 때 AOS의 화면이 와장창..
-<image src="https://velog.velcdn.com/images/seod0209/post/95b77fb0-e5ad-435d-b8e2-930250c11441/image.png" width="50%" height="auto"/>
+<image src="https://velog.velcdn.com/images/seod0209/post/95b77fb0-e5ad-435d-b8e2-930250c11441/image.png" width="50%" height="auto" alt="bad_ui"/>
 
 
 # Improvement
