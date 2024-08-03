@@ -7,7 +7,7 @@ set -eu
 opt_pre=false # option for bump gem version
 opt_pkg=false # option for building gem package
 
-MAIN_BRANCH="master"
+MAIN_BRANCH="main"
 RELEASE_BRANCH="production"
 
 GEM_SPEC="jekyll-theme-chirpy.gemspec"
