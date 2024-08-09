@@ -1,6 +1,5 @@
-
 ---
-title: React Native를 선택한 이유
+title: React Native를 선택한 이유 및 프로젝트 환경설정
 author: dongee_seo
 date: 2023-04-23
 categories: [Zippu, React-Native]
