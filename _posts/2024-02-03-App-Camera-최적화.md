@@ -46,7 +46,7 @@ tags: [react-native-vision-camera]
           <Camera
             device={device}
             isActive={true}
-            style={{ flex: 1 }}
+            style={{ flex: 1, }}
             frameProcessor={frame => {
               // 설정한 영역을 기준으로 얼굴 인식을 수행
               const roi = { x: 100, y: 100, width: 200, height: 200 };
