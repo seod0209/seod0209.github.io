@@ -3,13 +3,13 @@ title: React Native 각 OS 화면비율 맞추기
 author: dongee_seo
 date: 2023-06-13
 categories: [Zippu, React-Native]
-tags: [google analytics, react native, side project]
+tags: [react-native, styling, side project]
 ---
 
 # Problem
 
 iOS화면만 보고 개발했을 때 AOS의 화면이 와장창..
-<image src="https://velog.velcdn.com/images/seod0209/post/95b77fb0-e5ad-435d-b8e2-930250c11441/image.png" width="50%" height="auto" alt="bad_ui"/>
+<img src="https://velog.velcdn.com/images/seod0209/post/95b77fb0-e5ad-435d-b8e2-930250c11441/image.png" width="50%" height="auto" alt="bad_ui"/>
 
 
 # Improvement

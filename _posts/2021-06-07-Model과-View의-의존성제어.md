@@ -2,8 +2,8 @@
 title: Model and View
 author: dongee_seo
 date: 2021-06-07
-categories: [Blogging, Tutorial]
-tags: [google analytics, pageviews]
+categories: [Architecture]
+tags: [mvc, mvp, mvvm]
 ---
 
 ## 들어가며
@@ -29,9 +29,9 @@ tags: [google analytics, pageviews]
 ![](https://velog.velcdn.com/images%2Fseod0209%2Fpost%2Fee5fb76a-88fa-43f2-95a5-78c53dff6663%2Fimage.png)
 
 (1) Model: 일종의 데이터(Data).
-데이터 이외에 데이터를 조작하는 간단한 로직이 추가 되기도 한다. 이때 주의할 점은 모델이 데이터의 집합이라고 생각하면 안되다는 것이다. 모델은 UI와 Presenter를 제외한 모든 부분을 의미한다.
+데이터 이외에 데이터를 조작하는 간단한 로직이 추가 되기도 한다. 이때 주의할 점은 모델이 데이터의 집합이라고 생각하면 안 된다는 것이다. 모델은 UI와 Presenter를 제외한 모든 부분을 의미한다.
 
-(2) View: 사용자에게 제공되어지는 UI Layer를 뜻한다.보통 Application에서 View CSS/HTML/XML/XAML 등으로 렌더링 된 화면을 가르킨다.
+(2) View: 사용자에게 제공되어지는 UI Layer를 뜻한다.보통 Application에서 View CSS/HTML/XML/XAML 등으로 렌더링 된 화면을 가리킨다.
 
 MVP 와 MVVM 은 MVC 에서 파생되었기에, MVC 를 먼저 다룬 후, 세가지의 패턴을 비교해보도록 하겠다.
 
@@ -48,7 +48,7 @@ MVP 와 MVVM 은 MVC 에서 파생되었기에, MVC 를 먼저 다룬 후, 세�
 
 1. 입력은 Controller 로 들어온다.
 2. Controller는 사용자의 Action을 확인하고, Action을 업데이트 한다.
-3. Controller는 Model으르 나타내줄 View를 선택한다.
+3. Controller는 Model을 나타내줄 View를 선택한다.
 4. View는 Model을 이용해 업데이트 된 후 화면을 나타낸다.
 
 (3) 특징
@@ -74,7 +74,7 @@ MVC 패턴은 단순하다는 장점이 있다.
 
 즉, 의존성문제를 완전히 해결하지 못한다. 이러한 controller의 한계점을 극복하고자 mvp, mvvm이 등장하게되었다.
 
-### 3. MVP(Model View)
+### 3. MVP(Model View Presenter)
 
 ![](https://velog.velcdn.com/images%2Fseod0209%2Fpost%2F54ded783-b0e7-4b8a-8093-88e6dc3ee019%2FMVP%20%E1%84%80%E1%85%AE%E1%84%8C%E1%85%A9.png)
 
@@ -118,7 +118,7 @@ MVC 패턴은 단순하다는 장점이 있다.
 - MVVM 은 MVC 와 유사하다.
 - ViewModel : Controller 역할을 한다. 이름 그대로 View 를 위한 Model 이라고 보면 된다. 여기서 'View 를 위한 Model' 은 일반적인 Model 이 아닌 특정 View 에게 맞춰진 Model 을 의미한다.
 
-(2) MVP 패턴의 동작 순서
+(2) MVVM 패턴의 동작 순서
 
 ```null
 1. 사용자의 Action들은 View를 통해 들어온다.

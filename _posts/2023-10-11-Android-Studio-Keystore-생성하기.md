@@ -2,8 +2,8 @@
 title: Android Studio Keystore 생성하기
 author: dongee_seo
 date: 2023-10-11
-categories: [Blogging]
-tags: [google analytics, pageviews]
+categories: [Android]
+tags: [keystore, keytool, signing, android]
 ---
 
 **Command로 Keystore 생성하기**
@@ -39,7 +39,7 @@ Is CN=your name, OU=entre-reality, O=twinit, L=SEOUL, ST=SEOUL, C=KR?
 1. Then replace the following field in the `gradle.properties`
 
 ```
-cd..
+cd ..
 ```
 
 to the `android` folder, then run
@@ -54,8 +54,8 @@ to the `android` folder, then run
 
 **Android Studio에서 keystore 생성하기 (.jks : Java Key Store)**
 
-1. Build - Genderate Signed APK
-2. Click Abb and Next
+1. Build - Generate Signed APK
+2. Click AAB and Next
 3. click Create New and then write
    - password는 6자리 이상 입력.
    - 키저장소 password와 키 password는 다른것이다.

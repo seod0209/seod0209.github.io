@@ -3,15 +3,15 @@ title: React Native를 선택한 이유 및 프로젝트 환경설정
 author: dongee_seo
 date: 2023-04-23
 categories: [Zippu, React-Native]
-tags: [google analytics, react native, side project]
+tags: [react-native, typescript, side project]
 ---
 
 
 # **왜 React Native를 도입해야 하는가 ? 🧐**
 **1. 앱개발은 처음이라.. ✨**
-React Native는 React 문법을 통해 앱 개발을 할수있는 프레임워크이다. React와 매우 유사하므로 React를 통한 웹 개발 경험이 있는 나에게 앱개발의 진입장벽을 낮춰주었달까? 쉽게 React Native를 익힐 수 있다. 그리고 Emulator를 이용하여 에러 메시지를 잘 표시해주기 때문에 개발 경험이 매우 좋았다.
+React Native는 React 문법을 통해 앱 개발을 할 수 있는 프레임워크이다. React와 매우 유사하므로 React를 통한 웹 개발 경험이 있는 나에게 앱개발의 진입장벽을 낮춰주었달까? 쉽게 React Native를 익힐 수 있다. 그리고 Emulator를 이용하여 에러 메시지를 잘 표시해주기 때문에 개발 경험이 매우 좋았다.
  
-**2. 시간은 없는데요 두개를 만들라고하네요? **
+**2. 시간은 없는데요 두 개를 만들라고 하네요? **
 
 기존 Native 앱 개발에 있어서 android는 Kotlin, ios는 Swift를 이용해서 따로 개발해야했던 반면에, 하나의 코드로 android와 ios를 둘 다 개발할 수 있다는 장점이 있다. 하지만 이것은 양날의 검과도 같다..이유는 후술.
 
@@ -32,15 +32,15 @@ React Native는 React 문법을 통해 앱 개발을 할수있는 프레임워�
 ### 그러나 리액트 네이티브는 다음의 단점도 가지고 있다.
 
 **1. React Native와 Native와의 간극** 
-React Native는 대상 플랫폼의 네이티브 엘리먼트로 변환시켜주긴 하지만, 어쨌는 Native 앱은 아니기 때문에 필요에 따라 직접적인 native 코드 수정이 필요할 때가 있다. 
+React Native는 대상 플랫폼의 네이티브 엘리먼트로 변환시켜주긴 하지만, 어쨌든 Native 앱은 아니기 때문에 필요에 따라 직접적인 native 코드 수정이 필요할 때가 있다. 
 
 > 예를 들어, 앱에 첫 진입시 보이는 splash(launch screen)화면에 애니메이션을 넣어달라는 요구사항이 있었다. xCode나 android studio에서는 수정하기 어려운 부분이었다. 🥲 
-splash화면의 네이티브코드가 어떻게 구성되어있는지 어느 부분에 애니매이션을 어떻게 넣아야하는지 알고 있다면 간단히 수정할 수 있는 사항이었다. 즉 네이티브 코드를 수정해야하는 사항이었다.
+splash화면의 네이티브코드가 어떻게 구성되어있는지 어느 부분에 애니메이션을 어떻게 넣어야 하는지 알고 있다면 간단히 수정할 수 있는 사항이었다. 즉 네이티브 코드를 수정해야하는 사항이었다.
 
 또한, 새로운 버전의 네이티브가 나왔을 때(예를 들어, 업데이트 된 안드로이드 버전에서 새로운 API 세트를 제공할 때) React Native에서 이를 지원해줄 때까지 시간이 걸린다. 
 
 **2. 디버깅의 어려움** 
-React Native는 매우 좋은 디버깅 기능을 제공하고 있지만 그것은 React Native 생명 주기와 관련된 내용이거나 JavaScript와 관련된 내용에 대해서고, 실제로 개발을 진행하면서 느낀 점은 네이티브 쪽과 관력된 사항에는 디버깅이 어려웠다. 
+React Native는 매우 좋은 디버깅 기능을 제공하고 있지만 그것은 React Native 생명 주기와 관련된 내용이거나 JavaScript와 관련된 내용에 대해서고, 실제로 개발을 진행하면서 느낀 점은 네이티브 쪽과 관련된 사항에는 디버깅이 어려웠다. 
 디버깅한다고 코드를 타고들어가다보면 어느새 나는 native코드에 도달해있다.
 
 # **프로젝트 초기 환경**
@@ -49,7 +49,7 @@ React Native 커뮤니티에서 많은 개발자들은 **React Native CLI** �
 
 우리는 새로운 React Native 프로젝트를 **React Native CLI** 를 통하여 생성하였다.
 
-React Native CLI 를 사용하면 Java / Object-C 로 작성된 기본 모듈을 추가할 수 있다는 강력한 기능이 있기 때문에Android 및 iOS 플랫폼 모두에서 애플리케이션을 완벽하게 제어할 수 있다는 점 때문이었다.
+React Native CLI 를 사용하면 Java / Objective-C 로 작성된 기본 모듈을 추가할 수 있다는 강력한 기능이 있기 때문에 Android 및 iOS 플랫폼 모두에서 애플리케이션을 완벽하게 제어할 수 있다는 점 때문이었다.
 
 ### 정적 타입 check
 
@@ -86,7 +86,7 @@ API 요청 상태 관리를 위해 [React Query](https://react-query.tanstack.c
 
 React Query 를 사용하면 아래와 같이 API 요청 상태 관리를 Hook 으로 표현할 수 있다.
 ```tsx
-  `**const** { data, isLoading, isError, isIdle } **=** useQuery(queryKeys.GET_LEVEL_STATUS, getLevelStatus, options);`
+  const { data, isLoading, isError, isIdle } = useQuery(queryKeys.GET_LEVEL_STATUS, getLevelStatus, options);
 ```
 React Query 는 현재 ReactDOM 에서만 지원되는 `devtools` 를 제외하고 React Native와 바로 동작할 수 있게 설계되어 있다. 따라서, 팀에서 관리하는 **Webview, Webclient 등 다른 서비스와 API 요청 상태를 관리하기 위해 만든 커스텀 Hook 을 쉽게 공유하고 재사용 할 수 있다는 장점이 있다.**
 

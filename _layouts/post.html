@@ -72,22 +72,26 @@ tail_includes:
         </span>
 
         <div>
-          <!-- pageviews -->
-          {% if site.pageviews.provider and
-          site.analytics[site.pageviews.provider].id %}
-          <span>
-            <em id="pageviews">
-              <i class="fas fa-spinner fa-spin small"></i>
-            </em>
-            {{ site.data.locales[lang].post.pageview_measure }}
+          {% if site.pageviews.provider and site.analytics[site.pageviews.provider].id %}
+          <span class="post-views">
+            view
+            <em id="pageviews"><i class="fas fa-spinner fa-spin small"></i></em>
           </span>
           {% endif %}
-
-          <!-- read time -->
-          {% include read-time.html content=content prompt=true lang=lang %}
         </div>
       </div>
     </div>
+
+    {% if page.tags.size > 0 %}
+    <div class="post-tags post-tags-top">
+      {% for tag in page.tags %}
+      <a
+        href="{{ site.baseurl }}/tags/{{ tag | slugify | url_encode }}/"
+        class="post-tag no-text-decoration"
+      >{{- tag -}}</a>
+      {% endfor %}
+    </div>
+    {% endif %}
   </header>
 
   <div class="content">{{ content }}</div>

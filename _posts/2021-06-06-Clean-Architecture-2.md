@@ -2,8 +2,8 @@
 title: Clean Architecture (2)
 author: dongee_seo
 date: 2021-06-06
-categories: [Blogging, Tutorial]
-tags: [google analytics, pageviews]
+categories: [Architecture]
+tags: [clean architecture, 아키텍처]
 ---
 
 ## 계층을 나누는 목적
@@ -43,7 +43,7 @@ Entity는 무언가를 처리 할 때, Clean Architecture의 다른 구성요소
 
 쉬운 예제로, 영화 검색앱에서는 무엇이 entity인가? 일반적으로 가장 높은 수준의 규칙이 무엇인가?
 
-```jsx
+```swift
 struct Movie: Equatable, Identifiable {
   typealias Identifier = String
   enum Genre {
@@ -70,9 +70,9 @@ Movie라는 데이터 구조가 entity이다. entity는 데이터 구조 및 함
 Use Cases는 Entity를 사용해서 어플리케이션 고유의 비즈니스 **로직을 실현**한다. 시스템의 동작을 사용자의 입장에서 표현한 시나리오이다. 어떻게 시스템이 자동화되는지 말해주고 어떻게 어플리케이션이 행동하고 실행하는지 결정한다.
 따라서, Entity가 복수의 어플리케이션에 공유되고 Use Case는 만들어질 대상이 되는 어플리케이션에만 사용된다.
 
-둘 간의 관계를 살펴보면, Use Case는 Entity로 들어오고 나가는 데이터 흐름을 조정\*조작하고, 해당 Entity가 Use Case의 목표를 달성하도록 지시하는 역할을 한다.
+둘 간의 관계를 살펴보면, Use Case는 Entity로 들어오고 나가는 데이터 흐름을 조정·조작하고, 해당 Entity가 Use Case의 목표를 달성하도록 지시하는 역할을 한다.
 
-둘이 의존성 관계 또한, 가장 내부의Entity는 이 Use Case에 대해 전혀 알지 못한다는 것이다. 하지만 Use cases는 Entity의 흐름을 알고 조작해야 하므로 알고있어야 한다. 이 두 개념은 web page든 iPhone app에서 작동하든 상관하지 않고, 저장 장소 또한cloud에 저장되는 SQL 데이터베이스에 저장되는 전혀 영향을 받지 않는다.
+둘이 의존성 관계 또한, 가장 내부의 Entity는 이 Use Case에 대해 전혀 알지 못한다는 것이다. 하지만 Use cases는 Entity의 흐름을 알고 조작해야 하므로 알고있어야 한다. 이 두 개념은 web page든 iPhone app에서 작동하든 상관하지 않고, 저장 장소 또한 cloud에 저장되든 SQL 데이터베이스에 저장되든 전혀 영향을 받지 않는다.
 
 영화 검색 어플에서, 유저가 티켓을 주문하는 과정까지를 예시로 들면,
 Use Case는 사용자에게 보여줄 출력을 위해 해당 출력을 생성하기 위한 처리 단계를 기술한다. 그래서 이 Use Case를 Use Case Interactor라고도 한다.

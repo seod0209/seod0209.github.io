@@ -2,8 +2,8 @@
 title: Android 배포 후 keystore 보안
 author: dongee_seo
 date: 2023-10-12
-categories: [Blogging]
-tags: [google analytics, pageviews]
+categories: [Android]
+tags: [keystore, signing, aab, 배포]
 ---
 
 # **배경상황**
@@ -19,11 +19,11 @@ tags: [google analytics, pageviews]
 앱을 release용 aab(android app bundle)로 처음 빌드하려면 **keystore를 생성**하는 작업을 해야 합니다. 그 과정에서
 
 1. key store path
-2. key store passward
+2. key store password
 3. key alias
-4. key passward
+4. key password
 
-네 가지가 생성되는데 passward 같은 경우 분실 시 Play Store 에 업데이트가 불가하게 되는 등
+네 가지가 생성되는데 password 같은 경우 분실 시 Play Store 에 업데이트가 불가하게 되는 등
 
 잃어버리거나 유출당하면 절대 안되는 중요한 정보입니다.
 
@@ -33,7 +33,7 @@ tags: [google analytics, pageviews]
 
 > Java 관련 기술을 사용하는 파일들을 위한 파일확장.
 >
-> 응용프래그램을 구성가능한 파라미터들을 저장하는데 사용.
+> 응용프로그램을 구성가능한 파라미터들을 저장하는데 사용.
 >
 > 각 줄에 하나의 파라미터를 저장. key = value 형식으로 저장 됨.
 >
@@ -83,9 +83,9 @@ android {
 
 이렇게 하면 debug와 release를 서로 다른 keystore를 이용해서 빌드를 할 수 있습니다.
 
-## **Signed abb 추출하기**
+## **Signed aab 추출하기**
 
-Signed abb를 추출 후 Play Store 에 업로드하기 위해서는 아래의 단계를 수행합니다.
+Signed aab를 추출 후 Play Store 에 업로드하기 위해서는 아래의 단계를 수행합니다.
 
 1. Build → Generate Signed APK 선택
 
@@ -95,7 +95,7 @@ Signed abb를 추출 후 Play Store 에 업로드하기 위해서는 아래의 �
 
 4. release 선택 후> create
 
-5. Google Play Store > Production > App Bundle에 해당 abb를 업로드.
+5. Google Play Store > Production > App Bundle에 해당 aab를 업로드.
    ![](https://velog.velcdn.com/images/seod0209/post/4dc9b92a-0acd-4797-b96f-612afd2e1c67/image.png)
 
 ## **Play Store에 배포할 때는 서명키가 다를 경우 어떻게 할까요?**
@@ -110,4 +110,4 @@ Signed abb를 추출 후 Play Store 에 업로드하기 위해서는 아래의 �
 `keytool -export -rfc -keystore release.keystore -alias upload -file upload_certificate.pem`
 
 1. ‘업로드 키 재설정’ 요청 섹션에서 새 업로드 인증서 요청.
-2. 재설정된 인증서로 App Bunddle을 업로드.
+2. 재설정된 인증서로 App Bundle을 업로드.

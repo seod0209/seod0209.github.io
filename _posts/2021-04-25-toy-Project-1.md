@@ -2,8 +2,8 @@
 title: 'Clone Project(1): 마켓 쵸컬리(Market Cho-Kurly)'
 author: dongee_seo
 date: 2021-04-25
-categories: [Blogging, Tutorial]
-tags: [google analytics, pageviews]
+categories: [Project]
+tags: [react, 프로젝트, 회고]
 ---
 
 ![post-thumbnail](https://velog.velcdn.com/images/seod0209/post/ae28a0c4-0781-41c5-96f9-a4a25f7c6dcd/product.gif)
@@ -19,7 +19,7 @@ tags: [google analytics, pageviews]
 우리 팀은 이러한 마켓컬리의 모토를 이어받아 "간식, 과자, 떡 카테고리 중 초콜릿, 젤리, 캔디의 부분"을 특성화 시켜 **마켓 쵸컬리(Market Cho-Kurly)** 라는 이름으로 클론프로젝트를 진행하였다.
 ![](https://velog.velcdn.com/images%2Fseod0209%2Fpost%2F7ba5b25e-9ac6-4f21-93be-414ff5735715%2FChokurly%201.png)
 
-### 작업 기간: 2020.04.12 - 2020.04.23
+### 작업 기간: 2021.04.12 - 2021.04.23
 
 ### 기술 스택
 

@@ -2,8 +2,8 @@
 title: HTML과 CSS파일의 연결
 author: dongee_seo
 date: 2021-03-17
-categories: [Blogging, Tutorial]
-tags: [google analytics, pageviews]
+categories: [Web, CSS]
+tags: [css, selector, layout]
 ---
 
 ## CSS?
@@ -74,7 +74,7 @@ color: green;
 > `<div>` 태그는 만들고 나면 class나 id를 부여하여 각각의 스타일을 적용하게 된다. 그러나 id를 적용하면 우선순위가 아주 높다보니 다른 스타일 속성이 쉽게 무력화된다.
 > 따라서 id를 범용하면 home, banner, nav a 와 같이 길고 복잡한 selector를 사용해야 하므로, id 대신 class를 더 자주 쓴다.
 
-2. 밑줄귿는 방법
+2. 밑줄 긋는 방법
    1.
 
 - text-decoration: overline;
@@ -84,7 +84,7 @@ color: green;
 
 3) font-family:폰트 스타일 지정하는 속성
 
-주의) "Times New Roman"만 ""(쌍따옴표)로 감싸져 있는데, 폰트 이름에 띄워쓰기가 되어있으면 ""(쌍따옴표)를 사용해야합니다.
+주의) "Times New Roman"만 ""(쌍따옴표)로 감싸져 있는데, 폰트 이름에 띄어쓰기가 되어있으면 ""(쌍따옴표)를 사용해야합니다.
 사용자가 어떤 브라우저를 사용할지 모르기 때문에 font-family 값에는 보통 여러가지 폰트를 나열합니다.
 
 4. text-align: 글씨 정렬
@@ -104,7 +104,7 @@ CSS selector를 표기하는 방법중에
 
 해당 태그의 첫 번째 순서인지,
 
-마지막 순서인인지,
+마지막 순서인지,
 
 홀수/짝수 인지 알 수 있는 selector 표기법!
 
@@ -127,7 +127,7 @@ CSS selector를 표기하는 방법중에
 :: html 코드는 작성한 순서대로 페이지에 나타난다.
 이때 CSS의 `position` property를 사용하면, html 코드와 상관없이 그리고 싶은 어느 위치에나 요소를 배치시킬 수 있다.
 
-- `position: relative;`
+- `position: static;` // 기본값. 위치를 지정하지 않음
 - `position: relative;`
 - `position: absolute;` // position이 static이 아닌 parent를 기준으로 고정
 - `position: fixed;` //해당 브라우저의 페이지를 기준으로 고정

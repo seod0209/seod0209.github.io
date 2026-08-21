@@ -2,7 +2,7 @@
 title: App 카메라 최적화
 author: dongee_seo
 date: 2024-02-03
-categories: [React Native]
+categories: [React-Native]
 tags: [react-native-vision-camera]
 ---
 
@@ -11,6 +11,8 @@ tags: [react-native-vision-camera]
 ### 프로젝트 개요
 
  `react-native-vision-camera` 라이브러리를 활용하여 얼굴 인식을 구현하였다. 하지만 전체 화면에서 얼굴 인식을 수행할 때 성능 저하가 발생하여, 이를 해결하기 위한 최적화 작업을 진행하였다.
+
+> 💡 아래 예시는 `react-native-vision-camera` v2 API 기준이다. v3+에서는 `useCameraDevices().front` 대신 `useCameraDevice('front')`를 사용하고, `frameProcessorFps` prop은 제거되어 `fps` prop 또는 프레임 프로세서 내부에서 처리 주기를 조절한다.
 
 ### 문제점
 
@@ -33,6 +35,7 @@ tags: [react-native-vision-camera]
 
 1. **카메라 프리뷰에서 ROI 설정**:
     
+    {% raw %}
     ```tsx
     
     import { Camera, useCameraDevices } from 'react-native-vision-camera';
@@ -70,6 +73,7 @@ tags: [react-native-vision-camera]
     };
     
     ```
+    {% endraw %}
  인식할 영역만을 정의하고 해당 영역의 데이터만 처리했다.
     
 
@@ -112,7 +116,6 @@ tags: [react-native-vision-camera]
 2. **영역 내 인식**:
     
     ```tsx
-    typescriptCopy code
     const detectFace = (frame) => {
       // 얼굴 인식 로직
       const faces = detectFacesInFrame(frame);

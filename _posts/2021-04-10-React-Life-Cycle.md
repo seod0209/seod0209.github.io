@@ -2,12 +2,14 @@
 title: 컴포넌트
 author: dongee_seo
 date: 2021-04-10
-categories: [Blogging, Tutorial]
-tags: [google analytics, pageviews]
+categories: [React]
+tags: [react, lifecycle, 컴포넌트]
 ---
 
 > 컴포넌트가 브라우저에서 나타날때, 사라질때, 그리고 업데이트 될 때, 호출되는 API 이다.
 > '컴포넌트 초기 생성-업데이트-제거' 순서대로 살펴보겠다.
+
+> 💡 현재는 함수형 컴포넌트+Hooks가 권장됩니다. 아래는 클래스형 컴포넌트 라이프사이클의 학습 기록입니다.
 
 ## 1. 컴포넌트 초기생성
 
@@ -76,9 +78,9 @@ shouldComponentUpdate(nextProps, nextState) {
 리액트는 **변화가 발생하는 부분만 업데이트**를 해줘서 성능이 꽤 잘 나온다. 하지만, **변화가 발생한 부분만 감지해내기 위해서는 Virtual DOM** 에 한번 그려줘야한다.
 
 즉, 현재 컴포넌트의 상태가 업데이트되지 않아도, 부모 컴포넌트가 리렌더링되면, 자식 컴포넌트들도 렌더링 됩니다. (여기서 “렌더링” 된다는건, render() 함수가 호출된다는 의미)
-변화가 없으면 물론 DOM 조작은 하지 않게 됩니다. 그저 Virutal DOM 에만 렌더링 할 뿐이죠.이 작업은 그렇게 부하가 많은 작업은 아니지만, **컴포넌트가 무수히 많이 렌더링된다면** 쓸대없이 CPU가 낭비된다.
+변화가 없으면 물론 DOM 조작은 하지 않게 됩니다. 그저 Virtual DOM 에만 렌더링 할 뿐이죠.이 작업은 그렇게 부하가 많은 작업은 아니지만, **컴포넌트가 무수히 많이 렌더링된다면** 쓸데없이 CPU가 낭비된다.
 
-이처럼 쓸대없이 낭비되고 있는 이 CPU 처리량을 줄여주기 위해서,** Virtual DOM 에 리렌더링 하는것마저도 불필요할경우엔 방지하기 위해**서 shouldComponentUpdate 를 작성합니다.
+이처럼 쓸데없이 낭비되고 있는 이 CPU 처리량을 줄여주기 위해서,** Virtual DOM 에 리렌더링 하는것마저도 불필요할경우엔 방지하기 위해**서 shouldComponentUpdate 를 작성합니다.
 
 이 함수는 기본적으로 true 를 반환한다.
 우리가 따로 작성을 해주어서 **조건에 따라 false 를 반환**하면 해당 조건에는 render 함수를 호출하지 않는다.
@@ -108,7 +110,7 @@ getSnapshotBeforeUpdate(prevProps, prevState) {
         scrollTop, scrollHeight
       } = this.list;
 
-      // 여기서 반환 하는 값은 componentDidMount 에서
+      // 여기서 반환 하는 값은 componentDidUpdate 에서
       // snapshot 값으로 받아올 수 있습니다.
       return {
         scrollTop, scrollHeight

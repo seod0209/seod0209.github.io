@@ -2,8 +2,8 @@
 title: 마진 상쇄(margin collapsing)
 author: dongee_seo
 date: 2021-03-30
-categories: [Blogging, Tutorial]
-tags: [google analytics, pageviews]
+categories: [Web, CSS]
+tags: [css, margin, 마진상쇄]
 ---
 
 > 분명 margin-top(또는 margin-bottom)을 먹였는데... 왜죠 왜 사라지는거죠;;
@@ -51,7 +51,7 @@ CSS에서 인접한 2개 또는 그 이상의 박스(block 요소)들의 마진�
 
 #### 1-2-3 부모 박스와 첫 번째(마지막) 자식 박스의 상단(하단) 마진이 겹칠 때
 
-margin이란 콘텐츠 간의 간격이고, 간격을 벌리기 위해서는 경계를 필요한다.
+margin이란 콘텐츠 간의 간격이고, 간격을 벌리기 위해서는 경계가 필요하다.
 브라우저는 '부모 박스와 첫 번째(마지막) 자식 박스 간의 경계'를 그 사이에 있는 border / padding / inline 콘텐츠 유무로 판단한다.
 앞에 설명했던 빈 박스의 마진 상쇄 현상과는 조금 다르게, 이미 명시적으로 height / min-height 값을 줬더라도 이번 경우엔 적용되지 않는다.
 

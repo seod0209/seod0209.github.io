@@ -2,7 +2,7 @@
 title: Micro Frontend 
 author: dongee_seo 
 date: 2023-05-02 
-categories: [Blogging] 
+categories: [Frontend]
 tags: [Micro Frontend]
 ---
 
@@ -14,7 +14,7 @@ tags: [Micro Frontend]
 
 ## Micro Frontend 개념
 
-마이크로 프론앤드 개념으로 개발을 하는 잇점은 대규모 엔터프라이즈 애플리케이션을 개발한다고 가정할 때,
+마이크로 프론트앤드 개념으로 개발을 하는 이점은 대규모 엔터프라이즈 애플리케이션을 개발한다고 가정할 때,
 각 팀별 또는 업무단위에 대해 Backend + Frontend 개발 후 통합하는 이슈를 줄일 수 있다.
 
 - 작고, 응집력 있고 유지보수성을 가지는 코드베이스를 가질 수 있다. ( **_Simple, decoupled codebase_** )
@@ -27,7 +27,7 @@ tags: [Micro Frontend]
 - 서로간의 개발 환경의 차이로 복잡도가 올라간다. ( **_Environment differences_** )
 - 운영 및 거버넌스도 당연히 복잡해진다. ( **_Operational governance complexity_** )
 
-[Thoughtworks의 Technology Radar에 의하면 Micro Frontend가](https://www.thoughtworks.com/radar/techniques/micro-frontends) 현재 적용 가능한(Adapt) 상황이다.
+[Thoughtworks의 Technology Radar에 의하면 Micro Frontend가](https://www.thoughtworks.com/radar/techniques/micro-frontends) 현재 적용 가능한(Adopt) 상황이다.
 
 [마틴 파울러의 글](https://martinfowler.com/articles/micro-frontends.html) (또는 [번역글](https://medium.com/@juyeon.kate/micro-frontends-%EB%B2%88%EC%97%AD%EA%B8%80-1-5-29c80baf5df)) 에서 잘 설명을 하고 있으니 참조하자.
 
@@ -36,7 +36,7 @@ tags: [Micro Frontend]
 ![](https://blog.kakaocdn.net/dn/Dq0Wh/btqD9uvB5Ps/UriEcpocPkt5a9fICSAgYK/img.png)
 독립적인 개발 및 배포
 
-마이크로 프론앤드 방식으로 개발 후 각 단위 애플리케이션을 어떻게 통합할지 고려해야 한다. 통합할 때는 각 화면을 조합하는 컨테이너 애플리케이션이 있고, 그 하부에 들어가는 단위 애플리케이션이 존재한다. ([참조](https://medium.com/@juyeon.kate/micro-frontends-%EB%B2%88%EC%97%AD%EA%B8%80-2-5-66e3a31b72a9))
+마이크로 프론트앤드 방식으로 개발 후 각 단위 애플리케이션을 어떻게 통합할지 고려해야 한다. 통합할 때는 각 화면을 조합하는 컨테이너 애플리케이션이 있고, 그 하부에 들어가는 단위 애플리케이션이 존재한다. ([참조](https://medium.com/@juyeon.kate/micro-frontends-%EB%B2%88%EC%97%AD%EA%B8%80-2-5-66e3a31b72a9))
 
 - 서버 템플릿 통합: 각 서버로 html 템플릿을 요청하고, 최종 응답서버에서 각 템플릿을 조합해서 응답을 보냄
   - 서버측에서 최종 화면을 조합한다.
@@ -57,7 +57,7 @@ tags: [Micro Frontend]
   - Javascript를 통한 런타임 통합과 유사하지만 "The web component way"를 지향한다.
   - 클라이언트측에서 (브라우져) 통합한다.
 
-Mirco Frontend 통합할 때 몇가지 고려사항
+Micro Frontend 통합할 때 몇가지 고려사항
 
 - UI 스타일 일관성은 UI Component Library를 만들어 대응한다.
   - 한번에 만들지 말고, 중복코드가 발생하는 지점에서 만들고

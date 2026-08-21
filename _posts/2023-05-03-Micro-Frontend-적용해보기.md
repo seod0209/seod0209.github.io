@@ -2,7 +2,7 @@
 title: 'Micro Frontend: Practice' 
 author: dongee_seo 
 date: 2023-05-03 
-categories: [Blogging] 
+categories: [Frontend]
 tags: [Micro Frontend]
 ---
 
@@ -28,7 +28,7 @@ tags: [Micro Frontend]
 
 NextJS에서 마이크로 아키텍쳐를 구성하고 이를 통해서 얻을 수 있는 장점을 설명
 
-### 1. **`next-create-app`을 통해 3개의 서비스를 만든다.**
+### 1. **`create-next-app`을 통해 3개의 서비스를 만든다.**
 
 ```jsx
 npx create-next-app --ts container
@@ -44,6 +44,7 @@ npm i @module-federation/nextjs-mf@5.5.0
 
 ### 2. 라이브러리 패키지에서 공통 소스 코드만들기
 
+{% raw %}
 ```jsx
 ./contianer/src/component/Header.tsx
 
@@ -51,7 +52,7 @@ import React from "react";
 
 const Header = () => {
     return (
-        <div style="padding: 12px; width: 100%; height: 100px; background-color: #000; color: #fff;">
+        <div style={{ padding: 12, width: "100%", height: 100, backgroundColor: "#000", color: "#fff" }}>
             Header
         </div>
     );
@@ -59,6 +60,7 @@ const Header = () => {
 
 export default Header;
 ```
+{% endraw %}
 
 ### 3. 만들고 나서 Webpack 설정을 통해 해당 utility를 외부에서 사용하겠다고 알려주어야 한다.
 
@@ -172,7 +174,7 @@ const remotes = (isServer) => {
 const nextConfig = {
     reactStrictMode: true,
     webpack5: true,
-    disDir: "build", // Defined build directory
+    distDir: "build", // Defined build directory
     swcMinify: true,
     webpack: (config, options) => {
         Object.assign(config.experiments, { topLevelAwait: true });
@@ -229,7 +231,7 @@ const remotes = (isServer) => {
 const nextConfig = {
     reactStrictMode: true,
     webpack5: true,
-    disDir: "build", // Defined build directory
+    distDir: "build", // Defined build directory
     swcMinify: true,
     resolve: {
         extensions: [".ts", ".tsx", ".js", ".jsx"],
