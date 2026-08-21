@@ -17,8 +17,8 @@ keytool -genkey -v -keystore release.keystore -alias upload -keyalg RSA -keysize
 ```
 
 ```perl
-Enter keystore password: Entre123!
-Re-enter new password: Entre123!
+Enter keystore password: test1234
+Re-enter new password: test1234
 What is your first and last name: your name
   [Unknown]: your name
 What is the name of your organizational unit?
