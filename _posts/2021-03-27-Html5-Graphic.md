@@ -2,8 +2,8 @@
 title: <canvas> 와 SVG
 author: dongee_seo
 date: 2021-03-27
-categories: [Blogging, Tutorial]
-tags: [google analytics, pageviews]
+categories: [Web, HTML]
+tags: [canvas, svg, html5, graphic]
 ---
 
 > HTML5에서는 `<canvas>` 와 `SVG`를 이용하여 기존에 플래시, 실버라이트로 했던 그래픽 처리를 대체할 수 있다.
@@ -61,8 +61,8 @@ ctx.fillText("1", x, y);                                //주어진 x,y 위치�
 
 2-1. 의의
 
-- W3C에서 1999년 개발한 XML기반의 오푼 표준의 벡터 그래픽 파일 형식이다.
-- 모양 기반의 유지ㅣ 모드 그래픽 시스템으로 화면에 그릴 오브
+- W3C에서 1999년 개발한 XML기반의 오픈 표준의 벡터 그래픽 파일 형식이다.
+- 모양 기반의 유지 모드 그래픽 시스템으로 화면에 그릴 오브
 - ![](<https://velog.velcdn.com/images%2Fseod0209%2Fpost%2Fac8db047-3b5a-4135-84c5-924d5c12d9d5%2Fdownload%20(1).png>)SVG는 점과 점사이의 계산을 통해서 그리는 그래픽임.
 
 출처: [https://superfelix.tistory.com/604](https://superfelix.tistory.com/604) [☼ 꿈꾸는 도전자 Felix !]

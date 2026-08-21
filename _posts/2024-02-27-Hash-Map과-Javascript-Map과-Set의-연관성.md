@@ -2,8 +2,8 @@
 title: Hash Map과 Javascript Map과 Set의 연관성
 author: dongee_seo
 date: 2024-02-27
-categories: [Blogging]
-tags: [google analytics, pageviews]
+categories: [JavaScript]
+tags: [javascript, map, set, hashmap]
 ---
 
 # Hash Map과 Javascript Map과 Set의 연관성
@@ -39,7 +39,7 @@ Set 객체는 이터러블이다. 따라서 for…of문으로 순회 가능, 스
 ```jsx
 const set = new Set([1, 2, 3]);
 
-// Set.prototype 의 Symbol.interator 메서드를 상속받는 이터러블
+// Set.prototype 의 Symbol.iterator 메서드를 상속받는 이터러블
 console.log(Symbol.iterator in set); // true
 
 // for…of문으로 순회 가능
@@ -53,7 +53,7 @@ console.log([...set]); // [1,2,3]
 // 배열 디스트럭처링 할당의 대상
 const [a, ...rest] = set;
 console.log(a, rest); // 1 , [2,3]
----
+```
 
 ## 집합 연산
 
@@ -119,7 +119,7 @@ const setB = new Set([1, 2, 4]);
 
 // setA와 setB의 합집합
 console.log("합집합", setA.union(setB)); // [1,2,3,4]
----
+```
 
 ```jsx
 Set.prototype.union = function (set) {
@@ -154,7 +154,7 @@ const setB = new Set([1, 2, 4]);
 
 // setA와 setB의 차집합
 console.log("차집합", setA.difference(setB)); // [3]
----
+```
 
 ```jsx
 Set.prototype.difference = function (set) {
@@ -259,7 +259,7 @@ Map 객체는 key-value 쌍으로 이루어진 컬렉션
 - Map생성자 함수
   - 이터러블을 인수로 전달받아 Map객체를 생성.
     - 인수로 전달되는 이터러블은 key-value의 쌍으로 이루어진 요소로 구성되어야 함.
-    - 중복된 키를 갖는 요소가 존재할 경우 갚이 덮어씌워짐
+    - 중복된 키를 갖는 요소가 존재할 경우 값이 덮어씌워짐
       => 중복된 키를 갖는 요소 존재 불가.
 
 ```jsx

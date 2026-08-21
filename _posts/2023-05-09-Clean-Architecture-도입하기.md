@@ -2,7 +2,7 @@
 title: 'Clean Architecture: Practice'
 author: dongee_seo 
 date: 2023-05-09 
-categories: [Blogging] 
+categories: [Blogging]
 tags: [Architecture]
 ---
 
@@ -13,7 +13,7 @@ tags: [Architecture]
 초창기 "회사 관리자 웹서비스"는 `MVVM`패턴을 사용해서 개발을 진행했습니다.
 처음 MVVM 패턴을 도입하면서 Activity or Fragment에서 처리되었던 UI + 비즈니스 로직들이
 UI(Activity or Fragment) 와 ViewModel(비즈니스 로직) 으로 분리되었습니다.
-그 결과 역할 분담이 되어 Activity or Fragemnt의 역할이 많이 줄었습니다.
+그 결과 역할 분담이 되어 Activity or Fragment의 역할이 많이 줄었습니다.
 
 그 대신 복잡한 비즈니스 로직이 들어가게 되는 경우 ViewModel의 코드가 길어지는 현상이 발생했습니다.
 공통으로 사용 되는 부분들을 특정 ViewModel로 묶어서 작업을 진행 하였지만
@@ -33,7 +33,7 @@ UI(Activity or Fragment) 와 ViewModel(비즈니스 로직) 으로 분리되었�
 
 1. 세부 구현이 아닌 **도메인을 중심으로 설계**한다.
 2. 도메인은 프레임워크나 DB, UI 등 **외부 요소에 의존하지 않도록** 한다. 그리고 이 아키텍쳐가 동작하기 위해서는 **의존성 규칙**을 지켜야 한다.
-   (의존성 규칙은 모든 소스코드의 의존성은 외부에서 내부로, 즉, 고수준에서 저수준으로 향해야 한다는 규칙이다.
+   (의존성 규칙은 모든 소스코드의 의존성은 외부에서 내부로, 즉, 저수준에서 고수준으로 향해야 한다는 규칙이다.
    업무의 로직에 해당하는 코드들이 React 같은 프레임워크에 의존해서는 안됨.)
 
 위 목표를 반영하기 위해 프로젝트 폴더구조는 크게 3가지 계층으로 나눠서 CleanArchitecture를 적용했습니다.
@@ -43,12 +43,12 @@ UI(Activity or Fragment) 와 ViewModel(비즈니스 로직) 으로 분리되었�
 - DataLayer( API, Repository)
 
 DTO를 Entity로 생각 했기 때문에 의존성 방향은 단방향으로 흘러 가지만
-Domain은 독릭적인 모듈이 될 수 없다(Domain은 Data를 바라보기 때문)는 생각이 들었습니다.
+Domain은 독립적인 모듈이 될 수 없다(Domain은 Data를 바라보기 때문)는 생각이 들었습니다.
 그리고 DTO 와 Repository가 중심부에 있기 때문에 처음부터 어떤 통신 라이브러리를 사용할지 정해야 하기 때문에 중심이 아닌 바깥으로 가는게 맞다고 판단 되었습니다.
 해당 구조를 설계하면서 가장 크게 고민했던 3가지는 다음과 같습니다.
 
 1. 무엇을 Entity로 생각해야 하는가? 해당 부분은 Domain Layer에 있는 Model을 Entity로 생각 합니다.
-2. Domain은 독립적인 Module로 알고 있는데 Data 모듈을 참조하는게 좋은 방향일까? Domain 모듈이 어떤 Denpendency도 가지지 않은 독립적인 모듈이 됩니다.
+2. Domain은 독립적인 Module로 알고 있는데 Data 모듈을 참조하는게 좋은 방향일까? Domain 모듈이 어떤 Dependency도 가지지 않은 독립적인 모듈이 됩니다.
 3. 의존성주입을 어떻게 할것인가? InversifyJS사용으로 생성자 주입으로 객체간의 의존관계를 설정.
 
 # **클린 아키텍쳐 적용 후 느낀 장단점**

@@ -2,8 +2,8 @@
 title: Clean Architecture
 author: dongee_seo
 date: 2021-06-05
-categories: [Blogging, Tutorial]
-tags: [google analytics, pageviews]
+categories: [Architecture]
+tags: [clean architecture, 아키텍처]
 ---
 
 # Clean Architecture
@@ -31,7 +31,7 @@ tags: [google analytics, pageviews]
 ![](https://velog.velcdn.com/images/seod0209/post/347a1110-1bd1-42f3-9263-131286513265/image.png)
 위 그림은 왜 우리가 클린아키텍처를 사용해야하는지 보여준다.(스파게티코드 vs. 클린코드)
 
-### 클린아키텍처를 사용함으로써 클린 아키텍쳐를 사용하면서 설계하면 도메인과 인프라라는 계층을 분리해서 관리할 수 있게 된다. 따라서 도메인 층의 베이스 파일은 그대로 유지하고 필요한 부분만 바꿀 수 있어서 프로젝트 상에 문제 되지 않고 번거로운 덜어지게 된다. 즉, 도메인 계층의 분리로 소스코드 변경 안정성이 높아진다. 또한 인프라 계층의 테스트 가능성, 가독성, 유지보수성을 향상한다.
+### 클린 아키텍쳐를 사용하여 설계하면 도메인과 인프라라는 계층을 분리해서 관리할 수 있게 된다. 따라서 도메인 층의 베이스 파일은 그대로 유지하고 필요한 부분만 바꿀 수 있어서 프로젝트 상에 문제 되지 않고 번거로움이 덜어지게 된다. 즉, 도메인 계층의 분리로 소스코드 변경 안정성이 높아진다. 또한 인프라 계층의 테스트 가능성, 가독성, 유지보수성을 향상한다.
 
 그렇다면 도메인? 인프라계층? 이 무엇일까??
 
@@ -52,9 +52,4 @@ tags: [google analytics, pageviews]
 
 이 사실은 이것을 plugin architecture로 만든다. UI가 web interface든, a desktop app이든 mobile app이든 상관 없다는 뜻이다. 또한 데이터가 SQL에 저장되든 noSQL에 저장되든 클라우드에 저장되는 상관 없다는 뜻이다. 도메인은 상관하지 않으며, 단지 인프라만 쉽게 변화시킬 뿐이다.
 
-> 클린 아키텍쳐의 개념에 대해 도메인과 인프라로 크게 나누어 봤다면 다음장에서 더욱 디테일하게 용어들을 정리해보겠당.title: Clone Project(2): Care of Legend
-
-author: dongee_seo
-date: 2021-05-19
-categories: [Blogging, Tutorial]
-tags: [google analytics, pageviews]
+> 클린 아키텍쳐의 개념에 대해 도메인과 인프라로 크게 나누어 봤다면 다음장에서 더욱 디테일하게 용어들을 정리해보겠당.

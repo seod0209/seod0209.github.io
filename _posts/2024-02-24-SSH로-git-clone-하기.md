@@ -2,8 +2,8 @@
 title: ssh로 git clone 하기
 author: dongee_seo
 date: 2024-02-24
-categories: [Blogging]
-tags: [google analytics, pageviews]
+categories: [Git]
+tags: [ssh, git, github]
 ---
 
 # SSH
@@ -145,6 +145,8 @@ ls -al ~/.ssh
 ```
 ssh-keygen -t rsa -b 4096 -C "GitHub이메일주소"
 ```
+
+> 💡 현재 GitHub은 RSA보다 최신 알고리즘인 Ed25519를 권장합니다: `ssh-keygen -t ed25519 -C "GitHub이메일주소"`
 
 ```
 > Generating public/private rsa key pair.

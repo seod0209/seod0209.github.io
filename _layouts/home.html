@@ -5,111 +5,143 @@ refactor: true
 
 {% include lang.html %}
 
-{% assign pinned = site.posts | where: 'pin', 'true' %}
-{% assign default = site.posts | where_exp: 'item', 'item.pin != true and item.hidden != true' %}
+{% assign posts = site.posts | where_exp: 'item', 'item.hidden != true' %}
+{% assign author_name = site.social.name | default: site.title %}
+{% assign gc_id = site.analytics.goatcounter.id %}
 
-{% assign posts = '' | split: '' %}
-
-<!-- Get pinned posts -->
-
-{% assign offset = paginator.page | minus: 1 | times: paginator.per_page %}
-{% assign pinned_num = pinned.size | minus: offset %}
-
-{% if pinned_num > 0 %}
-  {% for i in (offset..pinned.size) limit: pinned_num %}
-    {% assign posts = posts | push: pinned[i] %}
-  {% endfor %}
-{% else %}
-  {% assign pinned_num = 0 %}
-{% endif %}
-
-<!-- Get default posts -->
-
-{% assign default_beg = offset | minus: pinned.size %}
-
-{% if default_beg < 0 %}
-  {% assign default_beg = 0 %}
-{% endif %}
-
-{% assign default_num = paginator.posts | size | minus: pinned_num %}
-{% assign default_end = default_beg | plus: default_num | minus: 1 %}
-
-{% if default_num > 0 %}
-  {% for i in (default_beg..default_end) %}
-    {% assign posts = posts | push: default[i] %}
-  {% endfor %}
-{% endif %}
-
-<div id="post-list" class="flex-grow-1 px-xl-1">
-  {% for post in posts %}
-    <article class="card-wrapper card">
-      <a href="{{ post.url | relative_url }}" class="post-preview row g-0 flex-md-row-reverse">
-        {% assign card_body_col = '12' %}
-
-        {% if post.image %}
-          {% assign src = post.image.path | default: post.image %}
-          {% unless src contains '//' %}
-            {% assign src = post.media_subpath | append: '/' | append: src | replace: '//', '/' %}
-          {% endunless %}
-
-          {% assign alt = post.image.alt | xml_escape | default: 'Preview Image' %}
-
-          {% assign lqip = null %}
-
-          {% if post.image.lqip %}
-            {% capture lqip %}lqip="{{ post.image.lqip }}"{% endcapture %}
-          {% endif %}
-
-          <div class="col-md-5">
-            <img src="{{ src }}" alt="{{ alt }}" {{ lqip }}>
-          </div>
-
-          {% assign card_body_col = '7' %}
+<div class="medium-home">
+  <!-- Publication header -->
+  <header class="pub-header">
+    <img class="pub-avatar" src="{{ site.avatar | relative_url }}" alt="{{ site.title }}" />
+    <div class="pub-meta">
+      <h1 class="pub-title">{{ site.title }}</h1>
+      <p class="pub-tagline">{{ site.tagline | default: site.description | strip }}</p>
+      <div class="pub-sub">
+        <span>{{ posts | size }} posts</span>
+        {% if site.social.links and site.social.links.size > 0 %}
+          <a class="pub-follow" href="{{ site.social.links[0] }}" target="_blank" rel="noopener">Follow</a>
         {% endif %}
+      </div>
+    </div>
+  </header>
 
-        <div class="col-md-{{ card_body_col }}">
-          <div class="card-body d-flex flex-column">
-            <h1 class="card-title my-2 mt-md-0">{{ post.title }}</h1>
+  <!-- Category tabs (client-side filter via ?category=) -->
+  <nav class="pub-tabs" aria-label="Categories">
+    <a href="{{ '/' | relative_url }}" data-cat="" class="active">전체</a>
+    {% for cat in site.categories limit: 7 %}
+      <a href="{{ '/?category=' | append: cat[0] | uri_escape | relative_url }}" data-cat="{{ cat[0] | slugify }}">{{ cat[0] }}</a>
+    {% endfor %}
+  </nav>
 
-            <div class="card-text content mt-0 mb-3">
-              <p>{% include post-description.html %}</p>
+  <!-- Post list. The most-viewed visible card is promoted to hero (.is-hero) by JS. -->
+  <div class="post-grid">
+    {% for post in posts %}
+      <article class="grid-card" data-cat="{% for c in post.categories %}{{ c | slugify }} {% endfor %}" data-path="{{ post.url }}" data-views="0">
+        <a href="{{ post.url | relative_url }}">
+          {% include home-thumb.html post=post index=forloop.index0 %}
+          <div class="grid-body">
+            <h3 class="grid-title">{{ post.title }}</h3>
+            <p class="grid-excerpt">{% include post-description.html max_length=130 %}</p>
+            <div class="card-meta">
+              <span class="m-author">{{ author_name }}</span>
+              <span class="m-dot">·</span>
+              {% include datetime.html date=post.date lang=lang %}
+              <span class="m-dot">·</span>
+              <span class="m-views">view <span class="pageviews">–</span></span>
             </div>
-
-            <div class="post-meta flex-grow-1 d-flex align-items-end">
-              <div class="me-auto">
-                <!-- posted date -->
-                <i class="far fa-calendar fa-fw me-1"></i>
-                {% include datetime.html date=post.date lang=lang %}
-
-                <!-- categories -->
-                {% if post.categories.size > 0 %}
-                  <i class="far fa-folder-open fa-fw me-1"></i>
-                  <span class="categories">
-                    {% for category in post.categories %}
-                      {{ category }}
-                      {%- unless forloop.last -%},{%- endunless -%}
-                    {% endfor %}
-                  </span>
-                {% endif %}
-              </div>
-
-              {% if post.pin %}
-                <div class="pin ms-1">
-                  <i class="fas fa-thumbtack fa-fw"></i>
-                  <span>{{ site.data.locales[lang].post.pin_prompt }}</span>
-                </div>
-              {% endif %}
-            </div>
-            <!-- .post-meta -->
           </div>
-          <!-- .card-body -->
-        </div>
-      </a>
-    </article>
-  {% endfor %}
-</div>
-<!-- #post-list -->
+        </a>
+      </article>
+    {% endfor %}
+  </div>
 
-{% if paginator.total_pages > 1 %}
-  {% include post-paginator.html %}
-{% endif %}
+  <div class="scroll-sentinel" aria-hidden="true"></div>
+
+  <p class="grid-empty d-none">해당 카테고리의 글이 없습니다.</p>
+</div>
+<!-- .medium-home -->
+
+<script>
+  (function () {
+    var PAGE = 9;
+    var GC_ID = {{ gc_id | jsonify }};
+    var norm = function (s) {
+      return (s || '').toString().trim().toLowerCase().replace(/[^a-z0-9가-힣]+/g, '-').replace(/^-|-$/g, '');
+    };
+    var params = new URLSearchParams(window.location.search);
+    var active = norm(params.get('category'));
+
+    var grid = document.querySelector('.post-grid');
+    var tabs = document.querySelectorAll('.pub-tabs a');
+    var cards = Array.prototype.slice.call(grid.querySelectorAll('.grid-card'));
+    var empty = document.querySelector('.grid-empty');
+    var sentinel = document.querySelector('.scroll-sentinel');
+    var shown = PAGE;
+
+    function isMatch(c) {
+      if (!active) return true;
+      return (c.getAttribute('data-cat') || '').split(' ').indexOf(active) >= 0;
+    }
+
+    function render() {
+      var matching = cards.filter(isMatch);
+      var i = 0;
+      cards.forEach(function (c) { c.classList.remove('is-hero'); });
+      cards.forEach(function (c) {
+        if (!isMatch(c)) { c.style.display = 'none'; return; }
+        c.style.display = (i < shown) ? '' : 'none';
+        i++;
+      });
+      if (matching.length > 0) matching[0].classList.add('is-hero');
+      if (empty) empty.classList.toggle('d-none', matching.length > 0);
+      if (sentinel) sentinel.style.display = (shown >= matching.length) ? 'none' : '';
+    }
+
+    tabs.forEach(function (a) {
+      a.classList.toggle('active', norm(a.getAttribute('data-cat')) === active);
+    });
+    render();
+
+    /* infinite scroll: reveal PAGE more when the sentinel nears the viewport */
+    if (sentinel && 'IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            var total = cards.filter(isMatch).length;
+            if (shown < total) { shown += PAGE; render(); }
+          }
+        });
+      }, { rootMargin: '300px' });
+      io.observe(sentinel);
+    }
+
+    /* GoatCounter: fill view badges, then sort by views desc */
+    if (GC_ID) {
+      var base = 'https://' + GC_ID + '.goatcounter.com/counter/';
+      Promise.all(cards.map(function (c) {
+        var path = (c.getAttribute('data-path') || '').replace(/\/$/, '');
+        return fetch(base + encodeURIComponent(path) + '.json')
+          .then(function (r) { return r.ok ? r.json() : { count: '0' }; })
+          .then(function (d) {
+            var n = parseInt((d.count || '0').replace(/\s/g, ''), 10) || 0;
+            c.dataset.views = n;
+            var pv = c.querySelector('.pageviews');
+            if (pv) pv.textContent = new Intl.NumberFormat().format(n);
+          })
+          .catch(function () {
+            var pv = c.querySelector('.pageviews');
+            if (pv) pv.textContent = '0';
+          });
+      })).then(function () {
+        var anyViews = cards.some(function (c) { return parseInt(c.dataset.views || 0, 10) > 0; });
+        if (anyViews) {
+          cards.slice()
+            .sort(function (a, b) { return parseInt(b.dataset.views || 0, 10) - parseInt(a.dataset.views || 0, 10); })
+            .forEach(function (c) { grid.appendChild(c); });
+          cards = Array.prototype.slice.call(grid.querySelectorAll('.grid-card'));
+          render();
+        }
+      });
+    }
+  })();
+</script>

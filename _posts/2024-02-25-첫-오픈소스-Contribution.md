@@ -2,8 +2,8 @@
 title: 첫 오픈소스 contribution
 author: dongee_seo
 date: 2024-02-25
-categories: [Blogging]
-tags: [google analytics, pageviews]
+categories: [Open-Source]
+tags: [babel, open-source, chirpy]
 image: 
   path: https://velog.velcdn.com/images/seod0209/post/19807d3d-67bf-4e1f-ae10-3971fb70c1e4/image.jpeg
   alt: '허헛'
@@ -49,7 +49,7 @@ class Person {
 }
 ```
 
-하지만, 이 코드는 일부 브라우저에서 지원되지 않을 수 있다.이를 이전 버전의 JavaScript로 변환하려면, 클래스 속성을 생성자 내부에서 할당하는 것으로 변환해야 한다.
+하지만, 이 코드는 일부 브라우저에서 지원되지 않을 수 있다. 이를 이전 버전의 JavaScript로 변환하려면, 클래스 속성을 생성자 내부에서 할당하는 것으로 변환해야 한다.
 
 이를 Babel을 사용하여 클래스 속성을 변환하는 플러그인을 사용하여 자동으로 변환할 수 있다. 예를 들어, @babel/plugin-transform-class-properties 플러그인을 사용하면 다음과 같이 클래스 속성을 변환할 수 있다.
 
@@ -69,7 +69,7 @@ class Person {
 
 위의 코드는 클래스 속성을 **직접 클래스 본문 내에서 선언하고 초기화**하는 것으로 변환된다. 이렇게 하면 코드를 더 간결하게 유지할 수 있으며, 클래스 생성자 내부에서 일일이 할당하는 작업을 수동으로 하지 않아도 된다.
 
-이러한 변환 작업은 플러그인을 사용하면 자동으로 이루어지므로 개발자가 직접 수동으로 변환 작업을 수행할 필요가 없습니다.따라서 **Babel에서 클래스 속성을 변환하는 플러그인을 사용**하여 최신 JavaScript 기능을 안정적이고 호환성 있게 사용할 수 있다.
+이러한 변환 작업은 플러그인을 사용하면 자동으로 이루어지므로 개발자가 직접 수동으로 변환 작업을 수행할 필요가 없습니다. 따라서 **Babel에서 클래스 속성을 변환하는 플러그인을 사용**하여 최신 JavaScript 기능을 안정적이고 호환성 있게 사용할 수 있다.
 
 ## 해결방안
 
