@@ -1,0 +1,66 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import { SITE } from '../../consts';
+import { slugify, excerpt, formatDate } from '../../utils';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts');
+  const map = new Map<string, { label: string; posts: typeof posts }>();
+  for (const p of posts) {
+    for (const t of p.data.tags) {
+      const s = slugify(t);
+      if (!s) continue;
+      if (!map.has(s)) map.set(s, { label: t, posts: [] as any });
+      map.get(s)!.posts.push(p);
+    }
+  }
+  return [...map.entries()].map(([s, v]) => ({
+    params: { tag: s },
+    props: {
+      label: v.label,
+      posts: v.posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+    }
+  }));
+}
+
+const { label, posts } = Astro.props;
+---
+
+<Base title={`#${label}`}>
+  <div class="container">
+    <h1 class="pub-title" style="margin-top:2rem">#{label}</h1>
+    <p class="pub-tagline">{posts.length} posts</p>
+    <div class="post-grid" style="margin-top:1.5rem">
+      {
+        posts.map((post, i) => {
+          const img = post.data.image;
+          const cat = post.data.categories?.[0] ?? 'DonZ';
+          const href = `/posts/${post.id}/`;
+          return (
+            <article class="grid-card">
+              <a href={href}>
+                {img ? (
+                  <div class="thumb" role="img" aria-label={post.data.title} style={`background-image:url('${img}')`} />
+                ) : (
+                  <div class={`thumb thumb-ph grad-${i % 6}`}>
+                    <span>{cat}</span>
+                  </div>
+                )}
+                <div class="grid-body">
+                  <h3 class="grid-title">{post.data.title}</h3>
+                  <p class="grid-excerpt">{excerpt(post.body ?? '', 130)}</p>
+                  <div class="card-meta">
+                    <span>{SITE.author}</span>
+                    <span class="dot">·</span>
+                    <span>{formatDate(post.data.date)}</span>
+                  </div>
+                </div>
+              </a>
+            </article>
+          );
+        })
+      }
+    </div>
+  </div>
+</Base>

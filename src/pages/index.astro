@@ -1,0 +1,183 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import { SITE, NAV_CATEGORIES } from '../consts';
+import { slugify, excerpt, formatDate } from '../utils';
+
+const posts = (await getCollection('posts')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+---
+
+<Base>
+  <div class="container">
+    <header class="pub-header">
+      <img class="pub-avatar" src={SITE.avatar} alt={SITE.title} />
+      <div class="pub-meta">
+        <h1 class="pub-title">{SITE.title}</h1>
+        <p class="pub-tagline">{SITE.tagline}</p>
+        <div class="pub-sub">
+          <span>{posts.length} posts</span>
+          <a class="pub-follow" href={SITE.github} target="_blank" rel="noopener">Follow</a>
+        </div>
+      </div>
+    </header>
+
+    <nav class="pub-tabs" aria-label="Categories">
+      <a href="/" data-cat="" class="active">전체</a>
+      {
+        NAV_CATEGORIES.map((c) => (
+          <a href={`/?category=${encodeURIComponent(c)}`} data-cat={slugify(c)}>
+            {c}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="post-grid">
+      {
+        posts.map((post, i) => {
+          const img = post.data.image;
+          const cat = post.data.categories?.[0] ?? 'DonZ';
+          const dataCat = post.data.categories.map((c) => slugify(c)).join(' ');
+          const href = `/posts/${post.id}/`;
+          return (
+            <article class="grid-card" data-cat={dataCat} data-path={href} data-views="0">
+              <a href={href}>
+                {img ? (
+                  <div class="thumb" role="img" aria-label={post.data.title} style={`background-image:url('${img}')`} />
+                ) : (
+                  <div class={`thumb thumb-ph grad-${i % 6}`}>
+                    <span>{cat}</span>
+                  </div>
+                )}
+                <div class="grid-body">
+                  <h3 class="grid-title">{post.data.title}</h3>
+                  <p class="grid-excerpt">{excerpt(post.body ?? '', 130)}</p>
+                  <div class="card-meta">
+                    <span>{SITE.author}</span>
+                    <span class="dot">·</span>
+                    <span>{formatDate(post.data.date)}</span>
+                    <span class="dot">·</span>
+                    <span>view <span class="pageviews">–</span></span>
+                  </div>
+                </div>
+              </a>
+            </article>
+          );
+        })
+      }
+    </div>
+
+    <p class="grid-empty" style="display:none">해당 카테고리의 글이 없습니다.</p>
+    <div class="scroll-sentinel" aria-hidden="true"></div>
+  </div>
+
+  <script is:inline define:vars={{ GC_ID: SITE.goatcounterId, PAGE: SITE.postsPerPage }}>
+    (function () {
+      var norm = function (s) {
+        return (s || '')
+          .toString()
+          .trim()
+          .toLowerCase()
+          .replace(/[^a-z0-9가-힣]+/g, '-')
+          .replace(/^-+|-+$/g, '');
+      };
+      var params = new URLSearchParams(window.location.search);
+      var active = norm(params.get('category'));
+
+      var grid = document.querySelector('.post-grid');
+      var tabs = document.querySelectorAll('.pub-tabs a');
+      var cards = Array.prototype.slice.call(grid.querySelectorAll('.grid-card'));
+      var empty = document.querySelector('.grid-empty');
+      var sentinel = document.querySelector('.scroll-sentinel');
+      var shown = PAGE;
+
+      function isMatch(c) {
+        if (!active) return true;
+        return (c.getAttribute('data-cat') || '').split(' ').indexOf(active) >= 0;
+      }
+
+      function render() {
+        var matching = cards.filter(isMatch);
+        var i = 0;
+        cards.forEach(function (c) {
+          c.classList.remove('is-hero');
+        });
+        cards.forEach(function (c) {
+          if (!isMatch(c)) {
+            c.style.display = 'none';
+            return;
+          }
+          c.style.display = i < shown ? '' : 'none';
+          i++;
+        });
+        if (matching.length > 0) matching[0].classList.add('is-hero');
+        if (empty) empty.style.display = matching.length > 0 ? 'none' : '';
+        if (sentinel) sentinel.style.display = shown >= matching.length ? 'none' : '';
+      }
+
+      tabs.forEach(function (a) {
+        a.classList.toggle('active', norm(a.getAttribute('data-cat')) === active);
+      });
+      render();
+
+      if (sentinel && 'IntersectionObserver' in window) {
+        var io = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting) {
+                var total = cards.filter(isMatch).length;
+                if (shown < total) {
+                  shown += PAGE;
+                  render();
+                }
+              }
+            });
+          },
+          { rootMargin: '300px' }
+        );
+        io.observe(sentinel);
+      }
+
+      if (GC_ID) {
+        var base = 'https://' + GC_ID + '.goatcounter.com/counter/';
+        Promise.all(
+          cards.map(function (c) {
+            var path = (c.getAttribute('data-path') || '').replace(/\/$/, '');
+            return fetch(base + encodeURIComponent(path) + '.json')
+              .then(function (r) {
+                return r.ok ? r.json() : { count: '0' };
+              })
+              .then(function (d) {
+                var n = parseInt((d.count || '0').replace(/\s/g, ''), 10) || 0;
+                c.dataset.views = n;
+                var pv = c.querySelector('.pageviews');
+                if (pv) pv.textContent = new Intl.NumberFormat().format(n);
+              })
+              .catch(function () {
+                var pv = c.querySelector('.pageviews');
+                if (pv) pv.textContent = '0';
+              });
+          })
+        ).then(function () {
+          var anyViews = cards.some(function (c) {
+            return parseInt(c.dataset.views || 0, 10) > 0;
+          });
+          if (anyViews) {
+            cards
+              .slice()
+              .sort(function (a, b) {
+                return parseInt(b.dataset.views || 0, 10) - parseInt(a.dataset.views || 0, 10);
+              })
+              .forEach(function (c) {
+                grid.appendChild(c);
+              });
+            cards = Array.prototype.slice.call(grid.querySelectorAll('.grid-card'));
+            render();
+          }
+        });
+      }
+    })();
+  </script>
+</Base>
