@@ -1,0 +1,75 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection, render } from 'astro:content';
+import { SITE } from '../../consts';
+import { slugify, formatDate, excerpt } from '../../utils';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts');
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const desc = excerpt(post.body ?? '', 160);
+---
+
+<Base title={post.data.title} description={desc} image={post.data.image} article={true}>
+  <article class="post">
+    <h1 class="post-title">{post.data.title}</h1>
+
+    <div class="post-header-meta">
+      <span>Posted {formatDate(post.data.date)}</span>
+      <span class="dot">·</span>
+      <span>By {SITE.author}</span>
+      <span class="dot">·</span>
+      <span>view <em id="pageviews">–</em></span>
+    </div>
+
+    {
+      post.data.tags.length > 0 && (
+        <div class="post-tags">
+          {post.data.tags.map((t) => (
+            <a class="post-tag" href={`/tags/${slugify(t)}/`}>
+              {t}
+            </a>
+          ))}
+        </div>
+      )
+    }
+
+    <div class="post-content">
+      <Content />
+    </div>
+  </article>
+
+  <div class="post-comments">
+    <script
+      src="https://utteranc.es/client.js"
+      repo="seod0209/seod0209.github.io"
+      issue-term="pathname"
+      theme="preferred-color-scheme"
+      crossorigin="anonymous"
+      async
+      is:inline></script>
+  </div>
+
+  <script is:inline define:vars={{ GC_ID: SITE.goatcounterId }}>
+    (function () {
+      if (!GC_ID) return;
+      var pv = document.getElementById('pageviews');
+      if (!pv) return;
+      var path = window.location.pathname.replace(/\/$/, '');
+      fetch('https://' + GC_ID + '.goatcounter.com/counter/' + encodeURIComponent(path) + '.json')
+        .then(function (r) {
+          return r.ok ? r.json() : { count: '0' };
+        })
+        .then(function (d) {
+          pv.textContent = new Intl.NumberFormat().format(parseInt((d.count || '0').replace(/\s/g, ''), 10) || 0);
+        })
+        .catch(function () {
+          pv.textContent = '1';
+        });
+    })();
+  </script>
+</Base>
