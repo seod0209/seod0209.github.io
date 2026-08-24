@@ -4,11 +4,10 @@ date: 2026-08-21
 categories: ["Workflow"]
 tags: ["Agent", "Figma", "MCP", "Breakpoint", "Design to Code"]
 ---
-<!-- DRAFT: 발행 전 날짜/제목 확정 필요 -->
 
 Figma MCP agent에게 Figma URL 하나를 던지고 "반응형으로 해줘"라고 하면 자주 깨진다. 문제는 구현력이 아니라 **읽기 기준이 비어 있다**는 점이다. 에이전트가 어떤 프레임을 기준으로 읽었는지, 모바일·태블릿·데스크톱 중 무엇을 source of truth로 삼았는지, 토큰과 raw value를 어떻게 구분했는지 알 수 없으면 결과도 검수할 수 없다.
 
-> 이 글은 회고가 아니라 Figma MCP agent에 넘길 작업 계약 초안이다.
+> 이 글은 Figma MCP agent를 반응형 디자인 작업에 붙이며, Figma URL을 읽기 계약·breakpoint 구현 계약·티켓 계약으로 바꿔 간 회고다.
 
 핵심은 Figma URL을 "자료"로 던지는 게 아니라, **읽기 계약 → 구현 계약 → 티켓 계약** 순서로 좁혀 주는 것이다.
 
