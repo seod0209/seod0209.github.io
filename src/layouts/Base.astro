@@ -72,56 +72,5 @@ const isProd = import.meta.env.PROD;
       <div class="container">© {new Date().getFullYear()} {SITE.author}</div>
     </footer>
 
-    <div id="capture-guard-toast" role="alert" aria-live="assertive"></div>
-
-    <script is:inline>
-      (function () {
-        var toast = document.getElementById('capture-guard-toast');
-        var timer;
-        function warn(msg) {
-          if (!toast) return;
-          toast.textContent = msg;
-          toast.classList.add('show');
-          clearTimeout(timer);
-          timer = setTimeout(function () { toast.classList.remove('show'); }, 2600);
-        }
-        function inProtected(el) {
-          return el && el.closest && el.closest('.post-content, .post-title, .grid-card');
-        }
-        ['copy', 'cut'].forEach(function (ev) {
-          document.addEventListener(ev, function (e) {
-            if (inProtected(e.target)) {
-              e.preventDefault();
-              warn('⚠️ 복사가 제한된 콘텐츠입니다.');
-            }
-          });
-        });
-        document.addEventListener('contextmenu', function (e) {
-          if (inProtected(e.target)) {
-            e.preventDefault();
-            warn('⚠️ 우클릭 메뉴가 제한됩니다.');
-          }
-        });
-        document.addEventListener('dragstart', function (e) {
-          if (inProtected(e.target)) e.preventDefault();
-        });
-        function isShotShortcut(e) {
-          if (e.key === 'PrintScreen') return true;
-          // macOS(⌘⇧3/4/5), 일부 스니핑 도구(⌃/⌘ + ⇧ + S)
-          if (e.shiftKey && (e.metaKey || e.ctrlKey) &&
-              ['3', '4', '5', 's', 'S'].indexOf(e.key) !== -1) return true;
-          return false;
-        }
-        document.addEventListener('keydown', function (e) {
-          if (isShotShortcut(e)) warn('⚠️ 화면 캡처 단축키가 감지되었습니다. 이 콘텐츠는 보호됩니다.');
-        });
-        document.addEventListener('keyup', function (e) {
-          if (e.key === 'PrintScreen') {
-            try { navigator.clipboard && navigator.clipboard.writeText(''); } catch (_) {}
-            warn('⚠️ 화면 캡처가 감지되었습니다. 이 콘텐츠는 보호됩니다.');
-          }
-        });
-      })();
-    </script>
   </body>
 </html>
