@@ -144,7 +144,7 @@ const posts = (await getCollection('posts')).sort(
         var base = 'https://' + GC_ID + '.goatcounter.com/counter/';
         Promise.all(
           cards.map(function (c) {
-            var path = (c.getAttribute('data-path') || '').replace(/\/$/, '');
+            var path = c.getAttribute('data-path') || '/';
             return fetch(base + encodeURIComponent(path) + '.json')
               .then(function (r) {
                 return r.ok ? r.json() : { count: '0' };

@@ -59,7 +59,7 @@ const desc = excerpt(post.body ?? '', 160);
       if (!GC_ID) return;
       var pv = document.getElementById('pageviews');
       if (!pv) return;
-      var path = window.location.pathname.replace(/\/$/, '');
+      var path = window.location.pathname;
       fetch('https://' + GC_ID + '.goatcounter.com/counter/' + encodeURIComponent(path) + '.json')
         .then(function (r) {
           return r.ok ? r.json() : { count: '0' };
@@ -68,7 +68,7 @@ const desc = excerpt(post.body ?? '', 160);
           pv.textContent = new Intl.NumberFormat().format(parseInt((d.count || '0').replace(/\s/g, ''), 10) || 0);
         })
         .catch(function () {
-          pv.textContent = '1';
+          pv.textContent = '0';
         });
     })();
   </script>
