@@ -38,6 +38,15 @@ const isProd = import.meta.env.PROD;
       isProd && (
         <script
           async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8291738466849150"
+          crossorigin="anonymous"
+        />
+      )
+    }
+    {
+      isProd && (
+        <script
+          async
           src="https://gc.zgo.at/count.js"
           data-goatcounter={`https://${SITE.goatcounterId}.goatcounter.com/count`}
         />
@@ -62,5 +71,6 @@ const isProd = import.meta.env.PROD;
     <footer class="site-footer">
       <div class="container">© {new Date().getFullYear()} {SITE.author}</div>
     </footer>
+
   </body>
 </html>
