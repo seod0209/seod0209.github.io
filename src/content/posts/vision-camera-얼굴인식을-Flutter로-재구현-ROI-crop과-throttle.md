@@ -1,5 +1,5 @@
 ---
-title: "vision-camera 얼굴인식을 Flutter로 재구현: ROI crop과 throttle로 15→20fps"
+title: "vision-camera 얼굴인식을 Flutter로 재구현 — ROI crop과 throttle"
 date: 2026-08-21
 categories: ["Flutter"]
 tags: ["Flutter", "google-mlkit", "camera", "face-detection", "performance"]
@@ -247,7 +247,7 @@ test('crops Y and interleaved VU planes correctly', () {
 
 ## 마무리
 
-RN에서 얻었던 15→20fps 개선을, Flutter에선 같은 세 가지 최적화(ROI 크롭 / 500ms throttle / ROI 내 판정)로 재현하는 게 목표였다. 옮기면서 배운 건:
+RN 시절에 얻었던 15→20fps 개선(이건 RN 글에서 나온 수치다)을, Flutter에선 같은 세 가지 최적화(ROI 크롭 / 500ms throttle / ROI 내 판정)로 재현하는 게 목표였다. 다만 Flutter 쪽에선 fps를 따로 측정하지 않았다. 그리고 "20fps"와 이 글의 500ms throttle은 다른 축의 숫자다 — 프리뷰 렌더 fps와 달리, 500ms throttle은 초당 약 2회 인식 주기를 뜻한다. 옮기면서 배운 건:
 
 - 선언형 prop이 없으니 throttle·busy 가드·회전 보정·버퍼 크롭을 **전부 직접** 짜야 했지만, 그 덕에 로직이 명확해져서 순수 함수로 떼어내기 쉬웠다.
 - ROI를 픽셀 절대값 대신 **분수(0..1)** 로 두니 해상도 독립적이 됐고, 기본 ROI가 프리뷰의 약 29%만 덮어서 ML Kit 입력 픽셀을 크게 줄였다.

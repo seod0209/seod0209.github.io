@@ -119,19 +119,20 @@ fruits.sayHi(); // Hi I am a watermelon.
 
 ```jsx
 function Person(name, food) {
-this.name = name;
-this.food = food;
-this.say = function(){
-  console.log(this.name+'는'+this.food+'!')
+  this.name = name;
+  this.food = food;
+  this.say = function () {
+    console.log(this.name + '는' + this.food + '!');
+  };
+}
 
 // 인스턴스의 생성
 var person1 = new Person('동이', '짬뽕');
 var person2 = new Person('동2', '올때 메로나');
 
-console.log(person1); //Person { name: '동이', food: '짬뽕', sayHi: ƒ () }
+console.log(person1); //Person { name: '동이', food: '짬뽕', say: ƒ }
 
-person2.sayHello(); // '동2는 올때 메로나'
-}
+person2.say(); // 동2는올때 메로나!
 ```
 
 - 함수를 정의할 때 사용하는 function과는 어떤 차이가 있을까 ?

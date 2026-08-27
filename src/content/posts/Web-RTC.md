@@ -19,15 +19,23 @@ tags: ["webrtc", "p2p"]
 
 - 비교적 소수의 서버에 집중하기보다는 망구성에 참여하는 기계들의 계산과 대역폭 성능에 의존하여 구성되는 통신망
 
-- 중개 서버를 거치지 않기 때문에 빠른 속도가 보장
+- 대칭형(symmetric) NAT나 방화벽 환경에서는 ICE가 TURN 릴레이 서버로 폴백하여 모든 트래픽이 릴레이를 거치게 된다. 따라서 항상 P2P로 직접 연결되는 것도, 항상 빠른 속도가 보장되는 것도 아니다.
 
-- HTTPS가 강제되기 때문에 중간자 공격에 대한 보안이 보장.
+- 미디어·데이터의 암호화 보안은 HTTPS가 아니라 **필수(mandatory) DTLS-SRTP**에서 온다. HTTPS는 페이지와 시그널링 채널만 보호할 뿐이며, 시그널링 서버를 신뢰할 수 없다면 지문(fingerprint) 검증 없이는 중간자 공격이 가능하므로 보안이 '보장'된다고 말할 수 없다.
 
 - 실시간으로 상호작용 => 더욱 개인화되고 참여 유도적인 웹 어플리케이션을 제작할 기회 제공
 
 ## 2. WebRTC 통신 원리
 
 ![](https://velog.velcdn.com/images/seod0209/post/900631fd-4d52-4e9d-bb5c-5eca12d333b7/image.png)
+
+#### STUN vs TURN, 그리고 시그널링
+
+- **STUN** 서버는 단말이 자신의 공인 IP·포트를 알아내도록 돕는 역할만 한다. 이렇게 알아낸 주소로 양쪽이 직접(P2P) 연결되면 트래픽은 서버를 거치지 않는다.
+
+- **TURN** 서버는 직접 연결이 불가능한 NAT/방화벽 환경에서 모든 미디어·데이터 트래픽을 대신 중계(relay)한다. ICE는 STUN으로 직접 연결을 먼저 시도하고 실패하면 TURN 릴레이로 폴백한다.
+
+- WebRTC는 시그널링(signaling) 프로토콜을 표준으로 규정하지 않는다. SDP·후보 주소를 어떻게 주고받을지는 애플리케이션이 자유롭게 선택하며(WebSocket, HTTP 등), 이 채널의 신뢰성이 곧 보안과 직결된다.
 
 ### Web RTC의 브라우저 호환성
 
@@ -50,3 +58,6 @@ WebRTC가 범용적으로 사용되기 위해서는 다양한 플랫폼과 브�
 - https://caniuse.com/?search=web%20rtc
 
 - [WebRTC는 어떻게 실시간으로 데이터를 교환할 수 있을까? - 재그지그의 개발 블로그](https://wormwlrm.github.io/2021/01/24/Introducing-WebRTC.html#stun-turn)
+
+## 출처
+- [RFC 8827 — WebRTC Security Architecture](https://www.rfc-editor.org/rfc/rfc8827)

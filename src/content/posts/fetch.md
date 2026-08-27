@@ -15,7 +15,7 @@ Fetch에는 일반적인 오브젝트로 Request 와 Response 가 포함되어 �
 또한 CORS나 HTTP 오리진 헤더의 행동에 관련한 개념에 대해서도 정의되어 있다. 이 정의는 여러곳에 분산되어있는 갖가지 행동에대한 정의들을 한곳에 고쳐 쓴 것이다
 
 > fetch(url, options)를 불러들이는 경우, 취득할 리소스를 반드시 인수로 지정해야한다. 읽어들인 뒤, fetch()는 Promise객체를 반환한다.
-> 반환된 객체는 리퀘스트가 성공하면 response객체를 resolve하고, 실패하면 예외(error)객체를 reject한다.
+> 반환된 객체는 리퀘스트가 완료되면 성공/실패 여부와 관계없이 response객체를 resolve한다. 주의: HTTP 에러 상태(404, 500, 504 등)에서도 reject되지 않으며, 네트워크 장애나 잘못된 URL 등 요청 자체가 실패한 경우에만 reject한다. 따라서 응답의 성공 여부는 response.ok(또는 response.status)로 직접 확인해야 한다.
 
 ```jsx
 fetch(url, options)
@@ -51,7 +51,10 @@ constructor() {
     fetch('http://localhost:3000/data/ThumbnailData.json', { //public폴더의 목데이터주소
       method: 'GET',
     })
-      .then(res => res.json())
+      .then(res => {
+        if (!res.ok) throw new Error(res.status); // HTTP 에러는 reject되지 않으므로 직접 확인
+        return res.json();
+      })
       .then(p => {
         this.setState({
           info: p,  //map()의 인자로 부여하기위해 state함
@@ -70,6 +73,7 @@ constructor() {
 ```jsx
 fetch("http://10.58.2.36:8000/users/signin", {
   method: "POST",
+  headers: { "Content-Type": "application/json" }, // JSON 전송 시 필수. 없으면 text/plain으로 전송됨
   body: JSON.stringify({
     email: "dong2@choco.com",
     password: "test",
@@ -77,7 +81,10 @@ fetch("http://10.58.2.36:8000/users/signin", {
     phone_number: 121212
   })
 })
-  .then((response) => response.json())
+  .then((response) => {
+    if (!response.ok) throw new Error(response.status); // HTTP 에러는 reject되지 않으므로 직접 확인
+    return response.json();
+  })
   .then((result) => {
     console.log(result);
     if (result.MESSAGE === "SUCCESS") {
@@ -102,3 +109,7 @@ fetch("http://10.58.2.36:8000/users/signin", {
 > 자료 출처
 >
 > - [https://developer.mozilla.org/ko/docs/Web/API/Fetch_API/Using_Fetch](https://developer.mozilla.org/ko/docs/Web/API/Fetch_API/Using_Fetch)
+
+## 출처
+
+- [MDN — Window.fetch()](https://developer.mozilla.org/ko/docs/Web/API/Window/fetch)

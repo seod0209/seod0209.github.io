@@ -232,7 +232,7 @@ Sentry.init({
 
 dsn: “클라이언트 DSN“,
 
-release: "Test",
+release: process.env.npm_package_version, // 소스맵 업로드 릴리즈와 동일한 값
 
 maxBreadcrumbs: 20,
 
@@ -240,6 +240,8 @@ maxBreadcrumbs: 20,
 ```
 
 과 같이 추가 입력해주면된다.
+
+> ⚠️ `release` 값은 `Sentry.init`과 소스맵 업로드(`sentry-cli releases new` / `upload-sourcemaps`)에서 **완전히 동일한 문자열**이어야 한다. 위에서 소스맵을 `${package.version}`(예: `0.3.5`)로 올렸다면 초기화의 `release`도 같은 값이어야 하고, 한 글자라도 다르면 Sentry가 이벤트와 소스맵을 매칭하지 못해 심볼리케이션(minify된 코드 → 원본 코드라인 복원)이 실패한다.
 
 (7) localhost:8000으로 띄워서 확인하기. `localhost:8000/index.html`
 

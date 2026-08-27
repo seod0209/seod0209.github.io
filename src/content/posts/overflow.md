@@ -27,7 +27,7 @@ tags: ["css", "overflow", "bfc"]
 - position: fixed, absolute
 - display: inline-block, table, table-cell, table-caption
 - display: flow-root (현재 모든 최신 브라우저에서 지원)
-- display: flex, inline-flex, grid, inline-grid
+- flex/grid 컨테이너의 자식(flex item, grid item) — flex/grid 컨테이너 자체는 BFC가 아니라 flex/grid 서식 맥락을 만들고, 그 안의 아이템들이 새 BFC를 생성한다
 
 ### 1-3 특징
 

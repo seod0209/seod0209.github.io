@@ -278,7 +278,7 @@ list서비스에서 작성한 Header를 container서비스로 가져와서 사�
 import dynamic from "next/dynamic";
 
 // Importing modules
-const Header = dynamic(() => import("list/src/component/Header"), {
+const Header = dynamic(() => import("list/header"), {
   suspense: true
 });
 

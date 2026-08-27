@@ -47,9 +47,9 @@ zippu/android/app/build.gradle에 들어가서 buildTypes 확인
 
 클래스 명과 함수명들이 모두 a,b,c등으로 바뀌게 된다.
 
-이로 인해 클래스명이나 함수명을 알 수 없어 모든 코드 구조를 알지 않는 이상 리버스 엔지니어링이 거의 불가능해진다.
+이로 인해 클래스명이나 함수명을 알 수 없게 되어 코드 구조 파악과 **분석 비용을 크게 높인다**. 다만 "거의 불가능"해지는 것은 아니다. 문자열 리터럴, API 엔드포인트, 리소스 등은 그대로 남고 `jadx` 같은 디컴파일러로 여전히 코드를 읽어낼 수 있다. 또한 `minifyEnabled true`는 난독화뿐 아니라 미사용 코드 제거(shrink)와 최적화(optimize)도 함께 수행하므로, 필요한 `-keep` 규칙이 빠지면 리플렉션으로 참조되는 클래스·메서드가 제거되어 런타임 크래시가 날 수 있다.
 
-소스 난독화의 동작에 관여하는 속성이 아니라, 앱의 패키징 시 사용하지 않는 리소스를 자동으로 제거할지 말지를 결정하는 것이다. 단독으로 사용되지 않으며 shrinkResources속성과 함께 사용
+`shrinkResources`는 소스 난독화의 동작에 관여하는 속성이 아니라, 앱의 패키징 시 사용하지 않는 리소스를 자동으로 제거할지 말지를 결정하는 것이다. 단독으로는 동작하지 않으며 반드시 `minifyEnabled true`와 함께 사용해야 한다(코드 축소가 켜져 있어야 어떤 리소스가 미사용인지 판단할 수 있기 때문).
 
 `proguardFiles getDefaultProguardFile`을 사용해서 기본 프로가드 설정
 
@@ -95,11 +95,13 @@ zippu/android/app/build.gradle에 들어가서 buildTypes 확인
 -keepattributes SourceFile,LineNumberTable
 ```
 
-(4) 소스파일의 변수명 변경
+(4) 스택 트레이스의 소스 파일명 문자열 치환
 
 ```jsx
 -renamesourcefileattribute SourceFile
 ```
+
+`-renamesourcefileattribute`는 변수명과는 **무관**하다. 스택 트레이스에 기록되는 원본 소스 파일명 문자열을, 여기 지정한 이름(예: `SourceFile`)이라는 상수 문자열로 바꿔 실제 파일명이 노출되지 않게 한다.
 
 1. `@Keep` annotation: 개별클래스의 난독화 방지
 
@@ -123,3 +125,6 @@ data class KotlinWorld(val blogName: String)
 [Proguard로 안드로이드 소스코드 난독화 하기](https://velog.io/@eoqkrskfk94/Proguard%EB%A1%9C-%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C-%EC%86%8C%EC%8A%A4%EC%BD%94%EB%93%9C-%EB%82%9C%EB%8F%85%ED%99%94-%ED%95%98%EA%B8%B0)
 
 [GitHub - lugg/react-native-config: Bring some 12 factor love to your mobile apps!](https://github.com/luggit/react-native-config/tree/master)
+
+## 출처
+- [Android — 앱 축소, 난독화, 최적화](https://developer.android.com/build/shrink-code)

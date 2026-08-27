@@ -80,6 +80,20 @@ z-index:initial;
 4) inherit: 부모요소로부터 상속받음.
 ```
 
+### 3-3 쌓임 맥락(stacking context)
+
+z-index가 값을 아무리 크게 줘도 원하는 대로 겹침 순서가 바뀌지 않는 경우가 있는데, 이는 요소들이 서로 다른 **쌓임 맥락(stacking context)** 에 속해 있기 때문이다. z-index는 같은 쌓임 맥락 안에서만 비교되며, 부모의 쌓임 맥락이 다르면 자식의 z-index 값끼리 직접 경쟁하지 못한다.
+
+쌓임 맥락은 다음과 같은 경우에 새로 생성된다.
+
+- position 이 relative/absolute/fixed/sticky 이면서 z-index 가 auto 가 아닌 값일 때
+- opacity 가 1 보다 작을 때
+- transform, filter, perspective, clip-path, mask 등이 적용될 때
+- position: fixed / sticky (z-index 값과 무관)
+- flex/grid 컨테이너의 자식이면서 z-index 가 auto 가 아닐 때
+
+맨 위 예시에서 fixed 로 설정한 A 레이아웃 아래로 relative 인 B 레이아웃이 지나가버린 것도, 두 요소가 각자 다른 쌓임 맥락에 놓여 z-index 만으로는 순서를 통제할 수 없었기 때문이다. 겹침 문제를 만나면 z-index 숫자를 키우기 전에, 두 요소가 같은 쌓임 맥락 안에 있는지부터 확인해야 한다.
+
 > 참고자료
 >
 > - [https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block](https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block)

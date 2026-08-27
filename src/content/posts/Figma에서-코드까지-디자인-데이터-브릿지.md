@@ -49,7 +49,7 @@ tags: ["Figma", "Plugin", "Design System", "자동화"]
 
 우린 느슨한 쪽을 택했다. 디자이너는 평소처럼 자유롭게 레이아웃을 짜되, 값을 자동으로 받고 싶은 레이어에만 **약속된 이름**을 붙이면 된다. 컴포넌트를 안 써도 되고, 프레임을 통째로 새로 그려도 되고, 그냥 텍스트 하나만 골라서 적용해도 된다.
 
-트레이드오프는 안다. 레이어명 오타 나면 매핑이 조용히 실패한다. 그래서 매칭을 **부분 매칭 + 대소문자 무시**로 관대하게 잡았다. `Car Price`, `car-price`, `CarPrice_main` 다 `car-price`로 인식된다. "정확한 스키마" 대신 "관대한 규칙"으로, 자동화와 디자인 자율성을 동시에 챙기는 절충이다.
+트레이드오프는 안다. 레이어명 오타 나면 매핑이 조용히 실패한다. 그래서 매칭을 **부분 매칭 + 대소문자 무시**로 관대하게 잡았다. `Car Price`, `car-price`, `car_price_main` 다 정규화하면 `car-price`를 포함하는 문자열이 돼서 인식된다. "정확한 스키마" 대신 "관대한 규칙"으로, 자동화와 디자인 자율성을 동시에 챙기는 절충이다.
 
 > 💡 자동화 도구를 만들 때 제일 흔한 실수가 "쓰는 사람한테 완벽한 규율을 요구"하는 거다. 규율을 강제하는 순간 아무도 안 쓴다. 도구가 사람 쪽으로 관대하게 굽혀야 채택된다.
 
@@ -183,12 +183,12 @@ async function setText(node, value) {
 }
 ```
 
-이미지는 URL을 UI(iframe) 쪽에서 받아 바이트로 넘겨야 한다. 샌드박스(`code.js`)는 `fetch`가 제한적이라, 실제 이미지 로딩은 UI에서 하고 바이트만 `postMessage`로 던지는 패턴을 쓴다.
+이미지는 URL만 있으면 된다. 현재 Figma Plugin API는 메인 스레드(`code.js`)에서 Fetch API를 공식 지원하고, URL로부터 바로 이미지를 만드는 `figma.createImageAsync(url)`도 제공한다. 그래서 UI에서 바이트를 받아 넘기던 우회 없이, `manifest.json`의 `networkAccess.allowedDomains`에 도메인만 등록하면 샌드박스에서 URL을 그대로 쓸 수 있다.
 
 ```js
-function setImageFill(node, imageUrl) {
-  // UI에서 이미 받아온 Uint8Array를 createImage로 등록
-  const image = figma.createImage(node._imageBytes);
+async function setImageFill(node, imageUrl) {
+  // URL에서 바로 이미지 생성 (메인 스레드 Fetch 지원)
+  const image = await figma.createImageAsync(imageUrl);
   node.fills = [{ type: "IMAGE", scaleMode: "FILL", imageHash: image.hash }];
 }
 ```
@@ -198,19 +198,17 @@ function setImageFill(node, imageUrl) {
 차량은 "얼마"가 하나가 아니다. **어떻게 사느냐**에 따라 보여줄 숫자가 달라진다.
 
 - **일시불**: 차량가 하나. `price` 레이어 = 차량가.
-- **리스 / 렌트**: 월 납입금이 주인공. `price` 레이어 = 월 납입금, `deposit-price` = 선납금, 별도로 계산기준(선납 30%, 60개월)이 붙는다.
+- **리스 / 렌트**: 월 납입금이 주인공. `price` 레이어 = 월 납입금, `deposit-price` = 선납금. 월 납입금·선납금 모두 API가 내려주는 확정 값을 쓰고, 프론트에서 되짚어 계산하지 않는다.
 
 그래서 UI에서 구매타입을 고르면, 같은 `price` 레이어라도 다른 값이 들어간다. 위 `applyToNode`의 2번 분기가 그 역할이다. 디자이너는 카드 레이아웃을 바꿀 필요 없이 라디오 버튼만 바꾸면, 리스 카드 ↔ 일시불 카드가 즉시 전환된다.
 
 ```js
 const PAYMENT_LABEL = { lease: "리스", rent: "렌트", lump: "일시불" };
 
-// 리스/렌트 월납입금 산출 기준 (선납 30%, 60개월)
-function estimateMonthly(vehicle) {
-  const upfront = vehicle.price * 0.3;   // 선납 30%
-  const financed = vehicle.price - upfront;
-  return Math.round(financed / 60);      // 60개월
-}
+// 월 납입금(monthly)은 이자·잔존가치·프로모션이 얽혀 있어
+// 프론트에서 (차량가 − 선납) ÷ 개월수로 되짚으면 틀린 숫자가 나온다.
+// 그래서 직접 계산하지 않고, API가 내려주는 확정 값(vehicle.monthly)을 그대로 쓴다.
+// (위 applyToNode의 price 분기가 won(vehicle.monthly)로 이미 그 값을 꽂는다.)
 ```
 
 ## 권장 레이어 구조
@@ -257,3 +255,6 @@ function estimateMonthly(vehicle) {
 ## 관련 작업
 
 > 본문 코드는 내부 가이드에 서술된 동작(레이어명 매핑·구매타입 분기·뱃지 제어)을 블로그용으로 재구성한 설계 예시다. 사내 도메인/식별정보는 일반화했다.
+
+## 출처
+- [Figma — Making Network Requests](https://www.figma.com/plugin-docs/making-network-requests/)

@@ -65,7 +65,7 @@ Javascript(Model)와 HTML(View) 사이에 ViewModel이 존재하여 하나로 �
 
 💡 대표적으로 SPA Framework에서는 Vue.js,Angular에서 양방향 데이터 바인딩 가능.
 
-**변화에 따라 DOM 객체 전체를 렌더링 하거나 데이터를 바꿔 성능이 감소**
+**데이터 변경을 감지해 화면과 모델을 동기화한다. 다만 DOM 전체를 다시 그리는 것은 아니다. Vue는 가상 DOM과 반응형 의존성 추적으로, Angular는 변화 감지(change detection)로 실제로 바뀐 바인딩만 갱신한다.**
 
 # Props vs State
 
@@ -85,7 +85,7 @@ props와 state를 구분하는 기준은, 어떤 컴포넌트에 입장에서 �
 - 읽기 전용: 자식 컴포넌트 내에서 수정이 불가능. 부모 요소에서 설정
 
 > JSX attribute(속성)
-> : key, children, ref 등. UI를 구성하는 "클래스" 이므로, 속성을 가질 수 있다.
+> : children 등은 props로 전달됩니다. 단, key와 ref는 일반 props가 아니라 React가 예약한 특수 프로퍼티라서 컴포넌트에 props로 전달되지 않습니다.
 
 ### **State (상태)**
 

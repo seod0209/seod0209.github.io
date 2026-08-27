@@ -206,10 +206,10 @@ import usTranslations from '@/translations/en_US.json';
 import krTranslations from '@/translations/ko_KR.json';
 
 const resources = {
-en_US: {
+en: {
 translation: usTranslations,
 },
-ko_KR: {
+ko: {
 translation: krTranslations,
 },
 
@@ -217,8 +217,8 @@ translation: krTranslations,
 
 i18n.use(initReactI18next).init({
 resources,
-lng: 'en_US',
-fallbackLng: 'en_US',
+// lng는 하드코딩하지 않는다. Next 라우트에서 감지된 locale을 _app에서 i18n.changeLanguage로 주입한다.
+fallbackLng: 'en',
 debug: true,
 interpolation: { escapeValue: true },
 returnObjects: true,
@@ -235,6 +235,8 @@ export default i18n;
 // \_app.tsx에 I18nextProvider 태그로 감싸준다.
 
 import { AppProps } from 'next/app';
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@/styles/style.scss';
 import Layout from '@/components/layout/Layout';
@@ -243,6 +245,11 @@ import { I18nextProvider } from 'react-i18next';
 import i18n from '@/utils/i18n';
 
 function MyApp({ Component, pageProps }: AppProps) {
+const { locale } = useRouter();
+useEffect(() => {
+if (locale) i18n.changeLanguage(locale);
+}, [locale]);
+
 return (
 <I18nextProvider i18n={i18n}>
 <RecoilRoot>

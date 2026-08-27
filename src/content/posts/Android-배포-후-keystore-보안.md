@@ -11,7 +11,7 @@ tags: ["keystore", "signing", "aab", "배포"]
 
 디버그 및 릴리즈 빌드할 때 keystore 파일을 잘 관리/사용했어야 하지만 개인 폴더에 스토어 키를 관리한 결과..키를 잃어버리게 되었고…
 
-따라서 관련 파일은 이제 **_프로젝트> android> app_** 내에 저장하여 관리하려 한다.
+따라서 keystore 파일은 프로젝트 트리(`android/app`) 안에 두면 실수로 커밋될 위험이 있으므로, **버전 관리(VCS) 바깥의 홈 디렉터리**(예: `~/.android/`나 `~/.gradle/`)에 보관하고, 비밀번호 등 자격 증명은 프로젝트가 아닌 `~/.gradle/gradle.properties`에 두는 것이 공식 권장 방식이다. 부득이하게 프로젝트 내부에 둔다면 `*.keystore`, `*.jks`, `keystore.properties` 등을 반드시 `.gitignore`에 추가해 커밋되지 않도록 해야 한다.
 
 ## **Keystore 정보관리 : gradle.properties**
 
@@ -25,6 +25,8 @@ tags: ["keystore", "signing", "aab", "배포"]
 네 가지가 생성되는데 password 같은 경우 분실 시 Play Store 에 업데이트가 불가하게 되는 등
 
 잃어버리거나 유출당하면 절대 안되는 중요한 정보입니다.
+
+> 📌 다만 여기서 두 가지 키를 구분해야 한다. **앱 서명 키(app signing key)**는 Play App Signing을 사용하면 Google이 보관·관리하므로 개발자가 잃어버릴 일이 없다. 개발자가 직접 관리하는 것은 **업로드 키(upload key)**인데, 이 업로드 키를 분실하거나 유출당하더라도 Play Console에서 **업로드 키 재설정을 요청**해 새 키로 계속 배포할 수 있다(아래 "서명키가 다를 경우" 참고). 즉 위에서 "password 분실 시 업데이트가 불가"라고 한 것은 Play App Signing을 쓰지 않고 앱 서명 키를 직접 관리하는 경우에 한정된 이야기이며, 업로드 키라면 재설정으로 복구가 가능하다.
 
 해당 정보들은 하드코딩으로 기입하지 않고 gradle.properties에 기입하여 keystore 정보를 필요한 곳에 가져다 사용합니다.
 

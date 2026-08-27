@@ -13,6 +13,8 @@ tags: ["react-native-vision-camera"]
 
 > 💡 아래 예시는 `react-native-vision-camera` v2 API 기준이다. v3+에서는 `useCameraDevices().front` 대신 `useCameraDevice('front')`를 사용하고, `frameProcessorFps` prop은 제거되어 `fps` prop 또는 프레임 프로세서 내부에서 처리 주기를 조절한다.
 
+> ⚠️ 아래 프레임 프로세서 예시는 흐름을 보여주기 위한 개념 코드다. worklet 실행 제약(별도 스레드에서 도는 등) 때문에 `cropFrame`/`detectFace`를 이 형태 그대로 붙여넣으면 동작하지 않을 수 있다. 실제 구현은 프레임 프로세서 플러그인/워클릿 규칙을 따라야 한다.
+
 ### 문제점
 
 얼굴 인식을 전체 화면에서 진행할 경우 발생한 문제:
@@ -208,7 +210,7 @@ const isFaceInROI = (face: Face, roi: ROI): boolean => {
 
 ### 성과
 
-- **속도 개선**: 얼굴 인식 속도가 15fps에서 20fps로 개선되었다.
+- **속도 개선**: 얼굴 인식이 체감상 눈에 띄게 부드러워졌다. (당시 메모에는 15fps→20fps로 적었으나, 측정 기기·해상도·측정 도구를 남겨두지 않아 정확한 수치 근거는 남아있지 않다.)
 - **성능 향상**: 전체 앱의 성능이 향상되어, 사용자 경험이 개선되었다.
 
 ### 결론
