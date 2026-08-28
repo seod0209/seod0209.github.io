@@ -64,6 +64,8 @@ cp ~/github/myapp.keystore ./android/app/myapp.keystore
 
 > 💡 keystore와 비밀번호는 절대 저장소에 커밋하지 않는다. CI 러너의 보호된 경로(`~/github/…`)나 secret에서 빌드 시점에만 주입한다.
 
+> 💡 한 가지 정확히 하고 가자. 위 keystore로 "내가 최종 서명"하는 건 **Play App Signing을 안 쓸 때**의 얘기다. Play App Signing을 켜면 개발자가 가진 keystore는 앱 서명 키가 아니라 **업로드 키**가 되고, 스토어에 올릴 AAB는 이 업로드 키로 서명한다. 실제 배포용 **앱 서명 키**는 Google이 보관·수행한다. 즉 최종 서명 주체가 개발자가 아니라 Google로 넘어가고, 업로드 키는 분실 시 재발급이 가능하다는 점이 다르다.
+
 ## iOS: 인증서 + 프로비저닝 + p8
 
 iOS는 손이 더 간다. 준비물이 세 종류.
@@ -78,6 +80,8 @@ CI에서는 이것들을 credentials 디렉터리에 복사해 넣는다.
 mkdir -p ./ios/credentials
 cp ~/github/fastlane-apple-appstore-credentials.p8 ./ios/credentials/
 ```
+
+> ⚠️ 여기서 `.p8`은 **코드 서명 자산이 아니다.** iOS 코드 서명은 인증서 + 프로비저닝 프로파일이 담당하고, `.p8`은 App Store Connect API(및 APNs)용 인증 키라 fastlane이 빌드 산출물을 **업로드/메타데이터 처리**할 때 쓰인다. 서명 준비물과 같은 디렉터리에 두다 보니 헷갈리기 쉽지만, 역할은 서명이 아니라 API 인증이다.
 
 그리고 빌드 시 **어떤 프로파일로 서명할지**를 `ExportOptions.plist`로 명시한다. iOS의 핵심이 이 파일이다.
 
@@ -136,7 +140,7 @@ Android든 iOS든, 우리는 서명 자산을 **dev와 production으로 완전�
 
 | | Android | iOS |
 |---|---|---|
-| 서명 자산 | keystore(`.keystore`) + 비번/alias | 인증서 + 프로비저닝 프로파일 + `.p8` |
+| 서명 자산 | keystore(`.keystore`) + 비번/alias | 인증서 + 프로비저닝 프로파일 (`.p8`은 서명 자산 아님·API 인증 키) |
 | 서명 주체 | 개발자(또는 Play App Signing) | Apple 통제 |
 | 빌드 설정 | `build.gradle signingConfigs` | `ExportOptions.plist` |
 | 흔한 실패 | keystore 파일명/경로 불일치 | 프로파일/번들ID 매핑 누락 |

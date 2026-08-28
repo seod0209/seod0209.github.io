@@ -90,11 +90,14 @@ image: "https://velog.velcdn.com/images/seod0209/post/d45cc4be-54b1-4150-b4bc-a5
     dir.setMag(isTail ? this.w - 30 : this.w);
     dir.mult(-1);
 
-    // 현재 움직이는 위치가 어디로 향하는지, 각도를 구한다.
+    // dir을 -1배 해 방향을 뒤집었으므로, 이 각도(heading)는 target에서 현재 위치(this.pos) 쪽,
+    // 즉 진행 반대 방향을 가리킨다. 몸통을 뒤로 늘어뜨리는 기준이 된다.
     this.angle = dir.heading();
     this.pos = p5.Vector.add(target, dir);
 
 ```
+
+> ⚠️ `dir.setMag()`는 `target`과 `this.pos`가 겹칠 때(거리 0)를 대비하지 못한다. 길이 0인 벡터를 정규화하면서 0으로 나누게 돼 좌표가 `NaN`이 되기 때문. `dir.setMag(...)` 앞에 `if (dir.mag() === 0) return;` 한 줄로 막아줘야 안전하다.
 
 #### 2. 몸통 그리기
  <img src="https://velog.velcdn.com/images/seod0209/post/5360876b-0963-460e-a299-adb807f1cf8c/image.png" alt="calc_angle" width="100%" height="auto" />

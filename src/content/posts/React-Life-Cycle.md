@@ -79,6 +79,8 @@ shouldComponentUpdate(nextProps, nextState) {
 즉, 현재 컴포넌트의 상태가 업데이트되지 않아도, 부모 컴포넌트가 리렌더링되면, 자식 컴포넌트들도 렌더링 됩니다. (여기서 “렌더링” 된다는건, render() 함수가 호출된다는 의미)
 변화가 없으면 물론 DOM 조작은 하지 않게 됩니다. 그저 Virtual DOM 에만 렌더링 할 뿐이죠.이 작업은 그렇게 부하가 많은 작업은 아니지만, **컴포넌트가 무수히 많이 렌더링된다면** 쓸데없이 CPU가 낭비된다.
 
+> render() 메서드는 반드시 값을 반환해야 한다. React 엘리먼트(JSX), 배열/Fragment, 문자열·숫자, portal을 반환하거나, 아무것도 그리지 않을 때는 `null`(또는 `false`)을 반환한다. (`undefined`는 반환할 수 없다.)
+
 이처럼 쓸데없이 낭비되고 있는 이 CPU 처리량을 줄여주기 위해서,** Virtual DOM 에 리렌더링 하는것마저도 불필요할경우엔 방지하기 위해**서 shouldComponentUpdate 를 작성합니다.
 
 이 함수는 기본적으로 true 를 반환한다.

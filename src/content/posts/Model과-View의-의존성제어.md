@@ -54,7 +54,7 @@ MVP 와 MVVM 은 MVC 에서 파생되었기에, MVC 를 먼저 다룬 후, 세�
 
 - View-Controller 관계: One-to-Many(일대다 관계)이다. Many-to-Many(다대다) 가 될 수도 있다.( Controller 는 view를 선택할 수 있기에 view를 여러개 관리할 수 있다. )
 - View 는 Controller 의 존재를 모른다. (=Controller 가 원하는 View 를 선택)
-- View 는 Model 의 변화에 대해 직접적으로 알지 못한다. 또한 Controller 는 view를 선택하지만 view를 직접 업데이트하지 않는다.
+- View 는 Model 을 직접 알고 있으며(참조하고 있으며), Model 을 이용해 화면을 갱신한다. 다만 Controller 는 view를 선택할 뿐 view를 직접 업데이트하지는 않는다. 이렇게 View가 Model에 직접 결합되는 점이 MVC의 특징이자 한계다.
 - 하지만 MVC에서 View가 업데이트 되는 방법을 살펴보면,
 
   ```text
@@ -115,6 +115,7 @@ MVC 패턴은 단순하다는 장점이 있다.
 (1) 구조
 
 - MVVM 은 MVC 와 유사하다.
+- MVVM 은 마틴 파울러가 정리한 Presentation Model 패턴에 계보를 두고 있으며, 마이크로소프트가 이를 WPF/Silverlight의 데이터 바인딩 환경에 맞게 변형해 MVVM 이라는 이름으로 소개했다.
 - ViewModel : Controller 역할을 한다. 이름 그대로 View 를 위한 Model 이라고 보면 된다. 여기서 'View 를 위한 Model' 은 일반적인 Model 이 아닌 특정 View 에게 맞춰진 Model 을 의미한다.
 
 (2) MVVM 패턴의 동작 순서

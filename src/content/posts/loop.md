@@ -33,6 +33,8 @@ tags: ["javascript", "반복문", "loop"]
 - for...in 문
 - for...of 문
 
+> (정정: 레이블 문·break 문·continue 문은 반복문 자체가 아니라, 반복의 흐름을 제어하는 문(statement)이다. 실제 반복문은 for·while·do...while·for...in·for...of다.)
+
 이하에서는 for문과 while문만 검토하겠다.
 
 1. for문은 반복횟수를 명확히 알고 있을때 주로 사용하고, while문은 조건에 따라 반복횟수를 결정해야할때 주로 사용
@@ -78,11 +80,11 @@ console.log(test); // 'hahahahahahahahahahahahahahahahahahahaha'
 let test = '';
 
  for(let i=0; i<10; i++){
-   console.log('inner');
+   console.log('outer');
    //바깥 for문은 i가 10이될 때 까지 1씩 증가한다.
 
    for(let j=0; j<10; j++){
-     console.log('outter', 1+i);
+     console.log('inner', 1+i);
      // 안쪽 for문은 바깥 for문이 반복실행되는만큼 반복되는데,
      //안쪽 for문은 j가 10이 될때 까지 1씩 증가하며 반복된다.
    }

@@ -15,7 +15,8 @@ tags: ["Next.js", "SSR", "CLS", "성능"]
 
 - **CSR(Client-Side Rendering)**: 서버는 빈 HTML + JS 번들만 준다. 브라우저가 JS를 받아 실행해야 화면이 생긴다. 초기엔 아무것도 없다가 확 채워진다 → 레이아웃이 흔들린다.
 - **SSR(Server-Side Rendering)**: 요청 시점에 서버가 HTML을 완성해서 내려준다. 첫 페인트에 이미 실제 내용이 들어있다.
-- **SSG/ISR**: 빌드(또는 일정 주기)에 미리 HTML을 만들어 캐시해두고 재사용한다. 이 구간엔 서버 렌더/서버 API 호출이 아예 안 일어난다.
+- **SSG(Static Site Generation)**: 빌드 시점에 미리 HTML을 만들어 캐시해두고 재사용한다. 이 구간엔 서버 렌더/서버 API 호출이 아예 안 일어난다.
+- **ISR(Incremental Static Regeneration)**: SSG처럼 미리 만든 HTML을 재사용하되, `revalidate` 시간이 지난 뒤 들어온 요청은 일단 기존(stale) HTML을 받고, 서버가 **백그라운드로 페이지를 재생성**한다. 이때 `getStaticProps`/`fetch`가 다시 실행되어 새 HTML로 교체된다. 단순히 캐시가 만료되는 게 아니라 "만료 후 재생성"이라는 게 핵심이다.
 
 landing 같은 "SEO도 중요하고, 첫 화면이 곧 광고인" 페이지는 첫 페인트가 곧 지표다. 그래서 CSR에서 SSR로 옮기는 게 맞았다.
 

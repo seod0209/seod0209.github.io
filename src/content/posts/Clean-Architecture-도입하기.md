@@ -22,11 +22,12 @@ UI(Activity or Fragment) 와 ViewModel(비즈니스 로직) 으로 분리되었�
 
 ![https://blog.cleancoder.com/uncle-bob/images/2012-08-13-the-clean-architecture/CleanArchitecture.jpg](https://blog.cleancoder.com/uncle-bob/images/2012-08-13-the-clean-architecture/CleanArchitecture.jpg)
 
-관심사에 따라 계층을 분리하고 계층간의 의존성을 단방향(바깥에서 안쪽)으로 만들어 준다는 점입니다. 간략하게 Entities , UseCases , Presenters 에 대해 설명하자면 다음과 같습니다.
+관심사에 따라 계층을 분리하고 계층간의 의존성을 단방향(바깥에서 안쪽)으로 만들어 준다는 점입니다. 원전(로버트 C. 마틴)에서는 안쪽에서 바깥쪽 순으로 Entities, Use Cases, Interface Adapters, Frameworks & Drivers 의 4계층으로 구성됩니다. 각 계층을 간략하게 설명하자면 다음과 같습니다.
 
 - Entities: 전사적 비즈니스 규칙을 캡슐화 합니다.
-- UseCases : 애플리케이션과 관련된 비즈니스 규칙을 포함하고 시스템의 모든 유즈 케이스 구현체들을 캡슐화 합니다.
-- Presenters : UseCase 또는 Entities 로부터 얻은 데이터를 가공하는 계층. ViewModel 이 해당 됩니다.
+- Use Cases : 애플리케이션과 관련된 비즈니스 규칙을 포함하고 시스템의 모든 유즈 케이스 구현체들을 캡슐화 합니다.
+- Interface Adapters : UseCase 또는 Entities 로부터 얻은 데이터를 외부에서 사용하기 편한 형식으로 가공하는 계층으로, Controllers, Gateways, Presenters 가 여기에 속합니다. ViewModel 은 이 중 Presenters 에 해당 됩니다.
+- Frameworks & Drivers : DB, UI, 웹 프레임워크 등 가장 바깥쪽의 세부 구현이 위치하는 계층입니다.
 
 목표
 
@@ -47,7 +48,7 @@ Domain은 독립적인 모듈이 될 수 없다(Domain은 Data를 바라보기 �
 해당 구조를 설계하면서 가장 크게 고민했던 3가지는 다음과 같습니다.
 
 1. 무엇을 Entity로 생각해야 하는가? 해당 부분은 Domain Layer에 있는 Model을 Entity로 생각 합니다.
-2. Domain은 독립적인 Module로 알고 있는데 Data 모듈을 참조하는게 좋은 방향일까? Domain 모듈이 어떤 Dependency도 가지지 않은 독립적인 모듈이 됩니다.
+2. Domain은 독립적인 Module로 알고 있는데 Data 모듈을 참조하는게 좋은 방향일까? 처음에는 DTO를 Entity로 두어 Domain이 Data를 바라봤지만, 의존성 규칙에 맞춰 방향을 뒤집어(Data가 Domain을 참조하도록) Domain 모듈이 어떤 Dependency도 가지지 않은 독립적인 모듈이 되도록 정리했습니다.
 3. 의존성주입을 어떻게 할것인가? InversifyJS사용으로 생성자 주입으로 객체간의 의존관계를 설정.
 
 # **클린 아키텍쳐 적용 후 느낀 장단점**

@@ -47,7 +47,9 @@ Future<Patch?> getCurrentPatch() async {
 
 ## 숨은 개발자 메뉴 (작성자 태그의 정체)
 
-버전 텍스트에 한 가지를 더 얹었다. **버전 문구를 7번 탭하면 숨겨진 개발자 메뉴**로 들어간다. 여기서 베타 채널(staging track) 토글 같은 걸 켤 수 있게 했다. 실사용자에겐 그냥 회색 버전 텍스트지만, 개발자/QA는 여기로 내부 track을 붙는다.
+버전 텍스트에 한 가지를 더 얹었다. **버전 문구를 7번 탭하면 숨겨진 개발자 메뉴**로 들어간다. 여기서 베타 채널(Shorebird의 `beta` track) 토글 같은 걸 켤 수 있게 했다. 실사용자에겐 그냥 회색 버전 텍스트지만, 개발자/QA는 여기로 내부 track을 붙는다.
+
+> ⚠️ 참고로 Shorebird의 `UpdateTrack`에는 `staging`이라는 상수가 따로 없다. 기본 제공되는 건 `UpdateTrack.stable`과 `UpdateTrack.beta`뿐이고, 그 외 이름(예: `staging`)은 `UpdateTrack.custom('staging')`이나 CLI의 `--track` 커스텀 트랙으로 다룬다. 그래서 내부 QA 채널은 `beta` 트랙이나 커스텀 트랙으로 잡는 게 맞다.
 
 ```dart
 void _handleTap() {

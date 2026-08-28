@@ -69,7 +69,8 @@ export function sendEvent(eventList: IEventItem[]) {
           gtagSendEvent({ action: eventName, rest: eventData });
           break;
         case 'notifly':
-          sendNotiflyEvent(eventName, eventData);
+          // sendNotiflyEvent는 async라 rejection이 이 동기 try/catch엔 안 잡힌다 → .catch()로 따로 처리
+          sendNotiflyEvent(eventName, eventData).catch(console.error);
           break;
         default:
           break;

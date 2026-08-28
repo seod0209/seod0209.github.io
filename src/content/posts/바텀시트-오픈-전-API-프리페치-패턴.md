@@ -99,7 +99,7 @@ export const useOpenOverlay = () => {
 const queryClient = new QueryClient();
 
 await queryClient.prefetchQuery({
-  queryKey: ['car/detail/info'],
+  queryKey: ['car/detail/info', id_cargrade],
   queryFn: () => fetchCarDetailInfo({ id_cargrade }),
 });
 

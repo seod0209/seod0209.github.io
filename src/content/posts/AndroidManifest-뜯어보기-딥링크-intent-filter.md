@@ -88,8 +88,12 @@ class MainActivity: FlutterActivity() {
     }
 
     private fun capturePendingDeeplink(intent: Intent?) {
-        val extras = intent?.extras ?: return
-        val url = extras.getString("url") ?: extras.getString("data.url")
+        if (intent == null) return
+        // 딥링크(myapp://...)는 VIEW 인텐트의 data(URI)로 들어온다. extras 가 아니다.
+        // 푸시 페이로드로 온 딥링크만 extras 에 실리므로, data 를 먼저 보고 없을 때 폴백한다.
+        val url = intent.data?.toString()
+            ?: intent.extras?.getString("url")
+            ?: intent.extras?.getString("data.url")
         if (!url.isNullOrEmpty()) {
             getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
                 .edit()
@@ -99,6 +103,8 @@ class MainActivity: FlutterActivity() {
     }
 }
 ```
+
+> ⚠️ 여기서 흔히 헷갈리는 지점. `myapp://community/123?from=push` 같은 딥링크의 scheme·host·path·query는 전부 **`intent.data`(URI)** 에 담긴다. `extras`만 읽으면(예전 이 코드처럼) VIEW로 들어온 딥링크 파라미터를 통째로 놓친다. `extras`의 `url`/`data.url`은 푸시 페이로드로 딥링크를 실어 보낼 때나 쓰는 경로이므로, 딥링크는 `intent.data`를 1순위로 읽고 필요하면 `intent.data.getQueryParameter(...)`로 파라미터를 꺼내야 한다.
 
 Dart 쪽에서는 `app_links` 플러그인으로 warm/cold 링크 스트림을 받되, 위에서 저장한 native pending 값도 같이 읽어 초기 진입을 처리한다. (이 라우팅 직렬화/중복 방지 로직은 별도 글 주제라 여기선 생략한다.)
 

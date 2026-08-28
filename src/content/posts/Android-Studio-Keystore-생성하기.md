@@ -17,8 +17,8 @@ keytool -genkey -v -keystore release.keystore -alias upload -keyalg RSA -keysize
 ```
 
 ```perl
-Enter keystore password: test1234
-Re-enter new password: test1234
+Enter keystore password: Zp!8xKq2$mR7
+Re-enter new password: Zp!8xKq2$mR7
 What is your first and last name: your name
   [Unknown]: your name
 What is the name of your organizational unit?
@@ -31,9 +31,11 @@ What is the name of your State or Province?
   [Unknown]:  SEOUL
 What is the two-letter country code for this unit?
   [Unknown]:  KR
-Is CN=your name, OU=entre-reality, O=twinit, L=SEOUL, ST=SEOUL, C=KR?
+Is CN=your name, OU=zippu, O=zippu, L=SEOUL, ST=SEOUL, C=KR?
   [no]: yes
 ```
+
+> ⚠️ 위 비밀번호는 예시일 뿐이며, 실제로는 사전 단어를 피하고 대소문자·숫자·기호를 섞은 강한 비밀번호를 사용하세요. keystore는 유출 시 앱 서명 위조로 이어질 수 있으므로 특히 중요합니다.
 
 1. Then replace the following field in the `gradle.properties`
 

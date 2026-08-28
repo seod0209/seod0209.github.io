@@ -161,12 +161,27 @@ ssh-keygen -t rsa -b 4096 -C "GitHub이메일주소"
 >
 > _RSA 방식의 단점인 누군가 악의적으로 내 컴퓨터를 컨트롤 할 수 있게 된다면, 내 컴퓨터에 있는 SSH Key 를 가진 모든 시스템에 접근 권한이 생기기 때문에 SSH Key 에 추가적으로 비밀번호를 추가하는 보안 레이어_
 
-**Step 3**: GitHub 계정에 SSH Key 추가
+**Step 2-1**: ssh-agent 에 키 등록
 
-SSH Key 복사 (id_rsa.pub 파일 내용 복사 — Public Key)
+생성한 키를 ssh-agent 에 등록해 두면 매번 passphrase 를 입력하지 않아도 된다.
 
 ```
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_ed25519   # RSA 로 만들었다면 ~/.ssh/id_rsa
+```
+
+**Step 3**: GitHub 계정에 SSH Key 추가
+
+SSH Key 복사 (Public Key 내용 복사)
+
+> ⚠️ 위에서 Ed25519로 키를 생성했다면 공개키 파일명은 `id_rsa.pub`이 아니라 `id_ed25519.pub`입니다. 아래 명령어의 파일명도 그에 맞게 바꿔주세요.
+
+```
+# RSA 로 생성한 경우
 pbcopy < ~/.ssh/id_rsa.pub
+
+# Ed25519 로 생성한 경우
+pbcopy < ~/.ssh/id_ed25519.pub
 ```
 
 우측 상단 프로필 사진 버튼 > **Settings**

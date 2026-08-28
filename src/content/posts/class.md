@@ -218,6 +218,8 @@ Rectangle.staticWidth = 20;
 Rectangle.prototype.prototypeWidth = 25;
 ```
 
+> (업데이트: 위 "인스턴스 속성은 메서드 안에서" / "정적·프로토타입 속성은 클래스 선언부 바깥에서" 정의해야 한다는 설명은 ES2022 이전 기준이다. ES2022부터 public·private·static 필드(class fields)를 클래스 본문에 직접 선언할 수 있어, 인스턴스 필드를 메서드 밖 본문에 적거나 static 필드를 클래스 안에서 선언할 수 있다. 실제로 위 `static displayName = "Point"` 예제와 아래 4. Field선언 예제가 이 최신 문법을 쓰고 있다. 다만 프로토타입 데이터 속성은 여전히 본문 밖(`Rectangle.prototype.…`)에서 추가한다.)
+
 4. Field선언
 
 - public 필드 선언

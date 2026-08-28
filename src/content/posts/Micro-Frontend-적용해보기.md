@@ -148,11 +148,10 @@ module.exports = {
 그러나 실행 시에는 서버 및 클라이언트에서 모듈 연합에 의해 원격/공유 모듈 로드 논리가 처리되므로
 하나의 ReactDOM 트리로 작동하는 모놀리스 앱으로 작동.
 
-기본적으로 nextjs.config에 "@module-federation/nextjs-mf" 플러그인을 추가하기만 하면됨.
+기본적으로 nextjs.config에 "@module-federation/nextjs-mf" 플러그인을 추가하는 것에서 시작한다. 다만 플러그인만으로 끝나는 것은 아니고, 아래에서 보듯 remotes/exposes/shared 설정과 트랜스파일 설정 등 추가 구성이 필요하다.
 
 ### 4**. next js의 next.config.js에 사용할 모듈 알려주기**
 
-![Screen Shot 2023-05-10 at 9.49.28 AM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/00e070f6-2094-4873-b016-88c55bfc02b8/Screen_Shot_2023-05-10_at_9.49.28_AM.png)
 
 [변경 전 코드]
 
@@ -209,6 +208,8 @@ module.exports = nextConfig;
 컴포넌트들을 Next 안으로 가져와서 사용하기 위해 별도의 트랜스파일링이 필요하다. yarn에서 `next-transpile-modules` 플러그인을 설치한다. next js에서 file을 로딩하기 전에 원하는 패키지를 사전에 transpiling 시켜주는 패키지이다.
 
 `npm i next-transpile-modules`
+
+> (업데이트: `next-transpile-modules`는 별도 패키지였지만, 현재는 Next 13.1+에서 `next.config.js`의 `transpilePackages` 옵션으로 대체되었습니다. 예: `const nextConfig = { transpilePackages: ["list"] }`. 최신 Next 버전에서는 이 옵션을 사용하는 것이 권장됩니다.)
 
 [변경 후 코드]
 
@@ -292,7 +293,6 @@ export default function Home() {
 }
 ```
 
-![Screen Shot 2023-05-10 at 11.23.13 AM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/cc37d924-8821-47d4-ac8a-1d7c9ee5ba6d/Screen_Shot_2023-05-10_at_11.23.13_AM.png)
 
 ### [참고 자료]
 

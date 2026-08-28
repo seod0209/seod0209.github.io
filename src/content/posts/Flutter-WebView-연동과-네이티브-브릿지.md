@@ -15,6 +15,8 @@ tags: ["Flutter", "WebView", "Bridge", "DeepLink", "Kakao"]
 
 원인은 웹이 `naversearchapp://`, `intent://` 같은 **비표준(래퍼) 스킴**을 던지는데 웹뷰가 이걸 어떻게 처리할지 우리가 정해준 적이 없어서였다. 기존 코드는 `tel / mailto / sms / geo` 정도만 외부로 넘기고 나머지는 전부 그냥 navigate시키고 있었다.
 
+> 하나 짚고 가자. iOS/WKWebView는 이런 외부 앱 URL scheme을 **자동으로 열어주지 않는다.** 위에서 "iOS가 조용히 다른 앱으로 튕겨나갔다"고 했지만, WKWebView가 알아서 앱을 띄운 게 아니라 처리되지 않은 스킴이 그렇게 보였을 뿐이다. 네이티브라면 `decidePolicyForNavigationAction`에서 `UIApplication.open`을 직접 호출해줘야 하고, Flutter에선 아래 `onNavigationRequest`의 폴스루(외부 앱 위임, `_launchExternalIfPossible`)가 그 몫을 대신한다.
+
 그래서 `onNavigationRequest`를 아예 재설계했다. 규칙은 이렇다.
 
 - `http / https / about` → 웹뷰가 직접 로드

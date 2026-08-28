@@ -15,7 +15,7 @@ tags: ["Flutter", "WebView", "Crashlytics", "크래시"]
 
 iOS에서 유독 이 크래시가 잡혔다. WebView가 있는 화면을 빠르게 들락거리면 가끔 앱이 죽었다.
 
-원인은 이렇다. `WKWebView`가 dealloc 되는 시점에, 아직 끝나지 않은 JS 콜백이나 navigation 콜백이 **이미 정리된 FlutterEngine 쪽으로 전달**되면서 `NSInternalInconsistencyException`이 난다. 화면을 빨리 닫을수록 이 race에 걸릴 확률이 올라간다.
+원인은 이렇게 **추정했다.** `WKWebView`가 dealloc 되는 시점에, 아직 끝나지 않은 JS 콜백이나 navigation 콜백이 **이미 정리된 FlutterEngine 쪽으로 전달**되면서 `NSInternalInconsistencyException`이 나는 것으로 보였다. 스택만으로 100% 단정하기는 어려워 가설에 가깝지만, 화면을 빨리 닫을수록 이 race에 걸릴 확률이 올라가는 정황과 맞아떨어졌다.
 
 해결은 dispose 시점에 **채널/델리게이트/페이지를 명시적으로 끊어주는 것**. dealloc 전에 붙어 있는 걸 미리 떼어내서 pending 콜백이 갈 곳을 없애준다.
 
@@ -127,6 +127,8 @@ static bool _isRecoverableError(Object error, [StackTrace? stack]) {
   return false;
 }
 ```
+
+> ⚠️ 다만 스택에 `image_provider.dart`가 찍혔다고 전부 non-fatal로 넘기는 건 위험할 수 있다. 라이브러리 라이프사이클 race가 아니라 진짜 OOM이나 우리 쪽 버그가 이미지 스택을 타고 올라온 경우까지 같이 묻어버릴 수 있어서, 이 분류는 실제 크래시가 가려지지 않는지 지표를 주기적으로 다시 확인하는 게 안전하다.
 
 ```dart
 FlutterError.onError = (errorDetails) {

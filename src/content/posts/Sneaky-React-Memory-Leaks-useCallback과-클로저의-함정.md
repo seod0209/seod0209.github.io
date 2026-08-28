@@ -25,6 +25,8 @@ function Component({ data }) {
 
 이런 코드는 두 가지가 동시에 새어나간다. (1) `handle`은 영원히 첫 렌더의 오래된 `data`만 본다(stale closure). (2) 첫 렌더의 클로저가 계속 살아있어 그 스코프 전체가 GC되지 않는다.
 
+> 이 둘은 서로 다른 문제다. **stale closure**는 함수가 오래된 값을 계속 참조하는 *동작* 버그(메모리가 안 줄어드는 것과 무관하게 값이 틀림)이고, **누수(leak)**는 그 클로저와 클로저가 붙잡은 스코프가 해제되지 않아 메모리가 쌓이는 *자원* 문제다. 위 코드처럼 얽혀서 같이 터질 수 있을 뿐, 원인과 증상은 구분해서 봐야 한다.
+
 ## 함정 1: useCallback을 쓰면서 deps를 잘못 줄 때
 
 `useCallback`은 "이 함수의 참조를 유지해줘"라는 도구다. 그런데 deps를 비우면 오래된 클로저를 그대로 고정해버린다. 반대로 deps에 매번 바뀌는 객체를 넣으면 useCallback이 무의미해진다(매번 새 함수).
@@ -104,7 +106,7 @@ useEffect(() => {
 - 콜백을 effect deps에 넣어 재등록이 반복되면 **ref 미러링**으로 참조를 고정하되 최신 값을 유지한다.
 - "1회성" 판정은 객체 참조가 아니라 **id 같은 원시값**으로 하고, 누적 상태는 `useRef(Set)`에 담는다.
 - 비동기(debounce/throttle/타이머)는 언마운트와의 경합을 항상 의심한다.
-- `useCallback`/`useMemo`는 "memoize했으니 안전"이 아니라, **deps가 맞아야** 안전하다. deps가 틀리면 오히려 stale closure로 새어나간다.
+- `useCallback`/`useMemo`는 "memoize했으니 안전"이 아니라, **deps가 맞아야** 안전하다. deps가 틀리면 stale closure(오래된 값 참조 버그)가 생기고, 그 고정된 클로저가 참조를 계속 붙잡으면 누수로도 이어진다 — 별개의 두 증상이다.
 
 > 💡 메모리 누수 디버깅은 감으로 하지 말자. Chrome DevTools의 Memory 탭에서 heap snapshot을 두 번 찍어 비교하면(자란 객체가 뭔지) 붙잡고 있는 참조가 보인다.
 

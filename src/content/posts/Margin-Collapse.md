@@ -32,8 +32,11 @@ CSS에서 인접한 2개 또는 그 이상의 박스(block 요소)들의 마진�
 #### 1-2-2 빈 블록의 상하 마진이 겹칠 때
 
 - '빈 블록'이란 높이(height)가 0인 상태의 블록 요소를 뜻한다.
-- height / min-height / padding / border 등 상하로 늘어나는 프로퍼티 값을 명시적으로 주지 않았거나
-- 내부에 Inline 콘텐츠가 존재하지 않는 요소
+- 빈 블록의 상하 마진이 상쇄되려면 아래 조건이 **모두(AND)** 충족되어야 한다. (하나라도 있으면 상쇄되지 않는다)
+  - border 와 padding 이 없고
+  - content(및 내부 inline 콘텐츠)가 없으며
+  - height 가 0(또는 명시하지 않음)이고
+  - min-height 도 0 일 것
 
 => 이 경우 **위와 아래를 가르는 경계가 없으므로** ,
 자신의 상단 마진의 값과 하단 마진의 값을 비교해
@@ -131,8 +134,6 @@ margin이란 콘텐츠 간의 간격이고, 간격을 벌리기 위해서는 경
    height: 900px;
    background-color: yellow;
    margin:0 0 0 40px;
-   display: flex;
-   flex-direction: column;
    display:inline-block;
 }
 ```

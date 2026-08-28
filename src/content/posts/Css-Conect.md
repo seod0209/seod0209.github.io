@@ -64,7 +64,8 @@ color: green;
 ```
 
 > CSS Specificity: Selector 우선순위
-> : tag <<<<< class <<<< id <<<<<<inline
+> : 흔히 tag < class < id < inline 순으로 표현하지만, 실제로는 (a,b,c) 형태의 **가중치 튜플**로 비교한다. a = id 개수, b = class·속성·가상클래스 개수, c = 태그·가상요소 개수이며, a → b → c 순서로 자리별로 비교한다. (inline 스타일은 이보다 더 높은 우선순위)
+> 따라서 낮은 등급을 아무리 많이 써도 높은 등급 하나를 항상 이기는 것은 아니다. 예를 들어 class를 여러 개 겹쳐도 id 하나(1,0,0)를 넘어서지 못한다.
 > css거의 대부분의 요소에 class를 부여해주고,
 > class를 selector로 styling해주기 때문에,
 > 최대한 중복을 피할 수 있도록 작성합니다.
@@ -148,7 +149,7 @@ ex. `<header>, <footer>, <p>, <li>, <table>, <div>, <h1>`등
 ex. `<span>, <a>, <img>` -요소끼리 서로 한 줄에, 바로 옆에 위치 할 수 있다.
 
 2. `display`와 `float`
-   > Block 요소의 성질을 가진 태그일지라도 CSS를 사용하여 Inline 스타일로 바꾸도록 하는 CSS property로 `display`와 `float` 가 있다.
+   > Block 요소를 좌우로 나란히 배치하고 싶을 때 쓰는 CSS property로 `display`와 `float`가 있다.
 
 ```text
 .block {
@@ -160,8 +161,8 @@ ex. `<span>, <a>, <img>` -요소끼리 서로 한 줄에, 바로 옆에 위치 �
 }
 ```
 
-해당 property에 위와 같은 값을 부여하면,
-요소 옆에 위치하는 inline성질로 변하게 된다.
+`display: inline-block`을 주면 요소가 옆에 배치되는 inline 성질을 갖게 된다.
+다만 `float`은 조금 다르다. float을 준다고 해서 요소가 inline이 되는 것이 아니라, **float된 요소의 computed display는 block으로 계산된다.** float은 요소를 일반 흐름(normal flow)에서 꺼내 좌/우로 흐르게 하여 다른 콘텐츠가 그 옆으로 감싸지도록 만들 뿐이다.
 
 > 반대로 원래의 inline성질을 block으로 바꾸게 할 수도 있다.
 
