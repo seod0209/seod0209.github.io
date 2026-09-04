@@ -55,7 +55,7 @@ Council Bluffs · Ashburn · Boardman · Frankfurt ...
 헤드리스/브라우저 자동화   GET / · JS·gtag 실행      → 이벤트 전송 → known bot 아니면 GA에 남음
 ```
 
-내가 본 Council Bluffs·Ashburn·Boardman은 "GA가 봇 필터링을 안 한다"가 아니라 **known-bot 필터를 통과한 자동화 트래픽**이다. 이렇게 사용자로 남는 전형적 경우:
+내가 본 Council Bluffs·Ashburn·Boardman은 "GA가 봇 필터링을 안 한다"가 아니라 **known-bot 필터를 통과한 자동화 트래픽**이다. 정직하게 UA를 밝히는 크롤러(Googlebot·Bingbot 등)는 GA4가 이미 지워서 **리포트에 아예 안 뜬다.** 내 리포트에 남아 나를 헷갈리게 한 건, IAB 목록에 없는 **미분류·변장 자동화**뿐이었다. 이렇게 사용자로 남는 전형적 경우:
 
 - 새롭거나 소규모라 아직 봇으로 분류되지 못한 크롤러
 - headless Chrome처럼 실제 브라우저로 JS를 진짜 실행
